@@ -1,0 +1,83 @@
+###############################################################################
+# Product:     OpenCTM tools
+# File:        Makefile.mingw
+# Description: Makefile for the OpenCTM tools, MS Visual Studio version
+###############################################################################
+# Copyright (c) 2009 Marcus Geelnard
+#
+# This software is provided 'as-is', without any express or implied
+# warranty. In no event will the authors be held liable for any damages
+# arising from the use of this software.
+#
+# Permission is granted to anyone to use this software for any purpose,
+# including commercial applications, and to alter it and redistribute it
+# freely, subject to the following restrictions:
+#
+#     1. The origin of this software must not be misrepresented; you must not
+#     claim that you wrote the original software. If you use this software
+#     in a product, an acknowledgment in the product documentation would be
+#     appreciated but is not required.
+#
+#     2. Altered source versions must be plainly marked as such, and must not
+#     be misrepresented as being the original software.
+#
+#     3. This notice may not be removed or altered from any source
+#     distribution.
+###############################################################################
+
+OPENCTMDIR = ..
+GLEWDIR = glew
+JPEGDIR = jpeg
+RPLYDIR = rply
+
+CPP = cl
+CPPFLAGS = /nologo /c /Ox /W3 /EHsc /I$(OPENCTMDIR) /I$(RPLYDIR) /I$(JPEGDIR) /I$(GLEWDIR) /DGLEW_STATIC
+RC = rc
+
+all: ctmconv.exe ctmviewer.exe
+
+clean:
+	del /Q ctmconv.exe ctmviewer.exe ctmconv.obj ctmviewer.obj systimer.obj convoptions.obj ctm.obj ply.obj stl.obj 3ds.obj mesh.obj rply.obj glew.obj bin2c.exe phong_frag.h phong_vert.h ctmconv.res ctmviewer.res
+
+ctmconv.exe: ctmconv.obj systimer.obj convoptions.obj ctm.obj ply.obj stl.obj 3ds.obj mesh.obj rply.obj ctmconv.res $(OPENCTMDIR)\openctm.lib
+	$(CPP) /nologo /Fe$@ ctmconv.obj systimer.obj convoptions.obj ctm.obj ply.obj stl.obj 3ds.obj mesh.obj rply.obj ctmconv.res /link /LIBPATH:$(OPENCTMDIR) openctm.lib
+
+ctmviewer.exe: ctmviewer.obj systimer.obj convoptions.obj ctm.obj ply.obj stl.obj 3ds.obj mesh.obj rply.obj glew.obj ctmviewer.res $(JPEGDIR)\libjpeg.lib $(OPENCTMDIR)\openctm.lib
+	$(CPP) /nologo /Fe$@ ctmviewer.obj systimer.obj convoptions.obj ctm.obj ply.obj stl.obj 3ds.obj mesh.obj rply.obj glew.obj ctmviewer.res /link /subsystem:windows /entry:mainCRTStartup /LIBPATH:$(OPENCTMDIR) /LIBPATH:$(JPEGDIR) openctm.lib glut.lib libjpeg.lib opengl32.lib glu32.lib
+
+.cpp.obj:
+	$(CPP) $(CPPFLAGS) /Fo$@ $<
+
+ctmconv.obj: ctmconv.cpp systimer.h convoptions.h ctm.h ply.h stl.h 3ds.h mesh.h
+ctmviewer.obj: ctmviewer.cpp systimer.h ctm.h ply.h stl.h 3ds.h mesh.h phong_vert.h phong_frag.h $(JPEGDIR)\libjpeg.lib
+systimer.obj: systimer.cpp systimer.h
+convoptions.obj: convoptions.cpp convoptions.h
+mesh.obj: mesh.cpp mesh.h convoptions.h
+ctm.obj: ctm.cpp ctm.h mesh.h convoptions.h
+ply.obj: ply.cpp ply.h mesh.h
+stl.obj: stl.cpp stl.h mesh.h
+3ds.obj: 3ds.cpp 3ds.h mesh.h
+
+phong_vert.h: phong.vert bin2c.exe
+	bin2c.exe phong.vert phongVertSrc > $@
+
+phong_frag.h: phong.frag bin2c.exe
+	bin2c.exe phong.frag phongFragSrc > $@
+
+bin2c.exe: bin2c.cpp
+	$(CPP) /nologo /Ox /W3 /EHsc /Fe$@ bin2c.cpp
+
+ctmconv.res: ctmconv.rc openctm.ico
+	$(RC) ctmconv.rc
+
+ctmviewer.res: ctmviewer.rc openctm.ico
+	$(RC) ctmviewer.rc
+
+$(JPEGDIR)\libjpeg.lib: 
+	cd $(JPEGDIR) && $(MAKE) /fmakefile.vc libjpeg.lib
+
+glew.obj: $(GLEWDIR)\glew.c
+	cl /nologo /c /Ox /W3 /I$(GLEWDIR) /DGLEW_STATIC /Fo$@ $(GLEWDIR)\glew.c
+
+rply.obj: $(RPLYDIR)\rply.c
+	cl /nologo /c /Ox /W3 /I$(RPLYDIR) /D_CRT_SECURE_NO_WARNINGS /Fo$@ $(RPLYDIR)\rply.c
