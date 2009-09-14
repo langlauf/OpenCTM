@@ -99,7 +99,7 @@
 <a name="l00164"></a>00164 <span class="preprocessor">#endif</span>
 <a name="l00165"></a>00165 <span class="preprocessor"></span>
 <a name="l00166"></a>00166 
-<a name="l00168"></a><a class="code" href="openctm_8h.html#909fd88252d88bd84095aba982900e7f">00168</a> <span class="preprocessor">#define CTM_API_VERSION 0x00000007</span>
+<a name="l00168"></a><a class="code" href="openctm_8h.html#909fd88252d88bd84095aba982900e7f">00168</a> <span class="preprocessor">#define CTM_API_VERSION 0x00000008</span>
 <a name="l00169"></a>00169 <span class="preprocessor"></span>
 <a name="l00171"></a><a class="code" href="openctm_8h.html#2004bfa9db3f5d6e07411d1bea3a573a">00171</a> <span class="preprocessor">#define CTM_TRUE 1</span>
 <a name="l00172"></a>00172 <span class="preprocessor"></span>
@@ -143,30 +143,30 @@
 <a name="l00219"></a><a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce5625f7d1a8887b82dc448f9d774e8874d98a">00219</a>   <a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce5625f7d1a8887b82dc448f9d774e8874d98a" title="Number of vertices in the mesh (integer).">CTM_VERTEX_COUNT</a>      = 0x0301, 
 <a name="l00220"></a><a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce56256d97b09d2d5da53c7c3bad5c5f30e51d">00220</a>   <a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce56256d97b09d2d5da53c7c3bad5c5f30e51d" title="Number of triangles in the mesh (integer).">CTM_TRIANGLE_COUNT</a>    = 0x0302, 
 <a name="l00221"></a><a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce5625dcbea5e453256bbbb3dc369e9f9fd872">00221</a>   <a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce5625dcbea5e453256bbbb3dc369e9f9fd872" title="CTM_TRUE if the mesh has normals (integer).">CTM_HAS_NORMALS</a>       = 0x0303, 
-<a name="l00222"></a><a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce56252ab3aa79076ba00ac42fa78bd7d8cecf">00222</a>   <a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce56252ab3aa79076ba00ac42fa78bd7d8cecf" title="Number of texture coordinate sets (integer).">CTM_TEX_MAP_COUNT</a>     = 0x0304, 
+<a name="l00222"></a><a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce562587b3013d9d9c151ca9eae64e74f981bd">00222</a>   <a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce562587b3013d9d9c151ca9eae64e74f981bd" title="Number of UV coordinate sets (integer).">CTM_UV_MAP_COUNT</a>      = 0x0304, 
 <a name="l00223"></a><a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce5625a0b3c108352ad1dbdb60ca6f57e921a4">00223</a>   <a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce5625a0b3c108352ad1dbdb60ca6f57e921a4" title="Number of custom attribute sets (integer).">CTM_ATTRIB_MAP_COUNT</a>  = 0x0305, 
 <a name="l00224"></a><a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce56257b32280d8591167a42904920934b8f51">00224</a>   <a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce56257b32280d8591167a42904920934b8f51" title="Vertex precision - for MG2 (float).">CTM_VERTEX_PRECISION</a>  = 0x0306, 
 <a name="l00225"></a><a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce5625e63ebc86a051e3f43492eb051eab9e97">00225</a>   <a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce5625e63ebc86a051e3f43492eb051eab9e97" title="Normal precision - for MG2 (float).">CTM_NORMAL_PRECISION</a>  = 0x0307, 
 <a name="l00226"></a><a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce5625e25493f9fd4ddc3e06043078a8c23e20">00226</a>   <a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce5625e25493f9fd4ddc3e06043078a8c23e20" title="Compression method (integer).">CTM_COMPRESSION_METHOD</a> = 0x0308, 
 <a name="l00227"></a><a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce5625a4b62d1802dd335fd7bfee2ed25c4c4d">00227</a>   <a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce5625a4b62d1802dd335fd7bfee2ed25c4c4d" title="File comment (string).">CTM_FILE_COMMENT</a>      = 0x0309, 
 <a name="l00228"></a>00228 
-<a name="l00229"></a>00229   <span class="comment">// Texture/attribute map queries</span>
-<a name="l00230"></a><a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce56253e3d28e72ec322ba63f94d77551c5ede">00230</a>   <a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce56253e3d28e72ec322ba63f94d77551c5ede" title="Unique name (texture/attrib map string).">CTM_NAME</a>              = 0x0501, 
-<a name="l00231"></a><a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce5625e9adc5919726099c90ea9ba732e85b6c">00231</a>   <a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce5625e9adc5919726099c90ea9ba732e85b6c" title="File name reference (texture map string).">CTM_FILE_NAME</a>         = 0x0502, 
-<a name="l00232"></a><a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce5625da5784c8eb3143ee996d31214d46b0d4">00232</a>   <a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce5625da5784c8eb3143ee996d31214d46b0d4" title="Value precision (texture/attrib map float).">CTM_PRECISION</a>         = 0x0503, 
+<a name="l00229"></a>00229   <span class="comment">// UV/attribute map queries</span>
+<a name="l00230"></a><a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce56253e3d28e72ec322ba63f94d77551c5ede">00230</a>   <a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce56253e3d28e72ec322ba63f94d77551c5ede" title="Unique name (UV/attrib map string).">CTM_NAME</a>              = 0x0501, 
+<a name="l00231"></a><a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce5625e9adc5919726099c90ea9ba732e85b6c">00231</a>   <a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce5625e9adc5919726099c90ea9ba732e85b6c" title="File name reference (UV map string).">CTM_FILE_NAME</a>         = 0x0502, 
+<a name="l00232"></a><a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce5625da5784c8eb3143ee996d31214d46b0d4">00232</a>   <a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce5625da5784c8eb3143ee996d31214d46b0d4" title="Value precision (UV/attrib map float).">CTM_PRECISION</a>         = 0x0503, 
 <a name="l00233"></a>00233 
 <a name="l00234"></a>00234   <span class="comment">// Array queries</span>
 <a name="l00235"></a><a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce5625a7ec8fe7061e8a336530ee0448073206">00235</a>   <a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce5625a7ec8fe7061e8a336530ee0448073206" title="Triangle indices (integer array).">CTM_INDICES</a>           = 0x0601, 
 <a name="l00236"></a><a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce5625f7e80243674806368e9e29e9e2bf8d55">00236</a>   <a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce5625f7e80243674806368e9e29e9e2bf8d55" title="Vertex point coordinates (float array).">CTM_VERTICES</a>          = 0x0602, 
 <a name="l00237"></a><a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce562502185a711fd216acee2171e46653855e">00237</a>   <a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce562502185a711fd216acee2171e46653855e" title="Per vertex normals (float array).">CTM_NORMALS</a>           = 0x0603, 
-<a name="l00238"></a><a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce56256c6379c18ff1c8069bfe7de79f31285e">00238</a>   <a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce56256c6379c18ff1c8069bfe7de79f31285e" title="Per vertex texture map 1 (float array).">CTM_TEX_MAP_1</a>         = 0x0700, 
-<a name="l00239"></a><a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce562521bde7320f12eb55517c684c376ad29e">00239</a>   <a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce562521bde7320f12eb55517c684c376ad29e" title="Per vertex texture map 2 (float array).">CTM_TEX_MAP_2</a>         = 0x0701, 
-<a name="l00240"></a><a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce562551caaf4ac641bda680a396ad38a03a39">00240</a>   <a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce562551caaf4ac641bda680a396ad38a03a39" title="Per vertex texture map 3 (float array).">CTM_TEX_MAP_3</a>         = 0x0702, 
-<a name="l00241"></a><a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce5625674e7d5257681e2acbd0f7f0589e1fc9">00241</a>   <a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce5625674e7d5257681e2acbd0f7f0589e1fc9" title="Per vertex texture map 4 (float array).">CTM_TEX_MAP_4</a>         = 0x0703, 
-<a name="l00242"></a><a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce5625ae515b0b306dd0cef9b26111c0d494d3">00242</a>   <a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce5625ae515b0b306dd0cef9b26111c0d494d3" title="Per vertex texture map 5 (float array).">CTM_TEX_MAP_5</a>         = 0x0704, 
-<a name="l00243"></a><a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce5625fd2ce811c730e7ec0b4e5873b4e31d68">00243</a>   <a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce5625fd2ce811c730e7ec0b4e5873b4e31d68" title="Per vertex texture map 6 (float array).">CTM_TEX_MAP_6</a>         = 0x0705, 
-<a name="l00244"></a><a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce56255010f2304d5d15c2bb5345435fb083f4">00244</a>   <a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce56255010f2304d5d15c2bb5345435fb083f4" title="Per vertex texture map 7 (float array).">CTM_TEX_MAP_7</a>         = 0x0706, 
-<a name="l00245"></a><a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce56253b23963366ad084bc1c1ae63cbbade68">00245</a>   <a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce56253b23963366ad084bc1c1ae63cbbade68" title="Per vertex texture map 8 (float array).">CTM_TEX_MAP_8</a>         = 0x0707, 
+<a name="l00238"></a><a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce56259096ee63af274788fe101c75c08b49f6">00238</a>   <a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce56259096ee63af274788fe101c75c08b49f6" title="Per vertex UV map 1 (float array).">CTM_UV_MAP_1</a>          = 0x0700, 
+<a name="l00239"></a><a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce5625104b93d0bfa7344406c68a45da3f616f">00239</a>   <a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce5625104b93d0bfa7344406c68a45da3f616f" title="Per vertex UV map 2 (float array).">CTM_UV_MAP_2</a>          = 0x0701, 
+<a name="l00240"></a><a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce56252543bac2bdc3931d37e0465f761060be">00240</a>   <a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce56252543bac2bdc3931d37e0465f761060be" title="Per vertex UV map 3 (float array).">CTM_UV_MAP_3</a>          = 0x0702, 
+<a name="l00241"></a><a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce5625cc9b387f30b02c370decac35a253b7a0">00241</a>   <a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce5625cc9b387f30b02c370decac35a253b7a0" title="Per vertex UV map 4 (float array).">CTM_UV_MAP_4</a>          = 0x0703, 
+<a name="l00242"></a><a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce5625d96f31e47775ac51ca393b19525cd8cc">00242</a>   <a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce5625d96f31e47775ac51ca393b19525cd8cc" title="Per vertex UV map 5 (float array).">CTM_UV_MAP_5</a>          = 0x0704, 
+<a name="l00243"></a><a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce5625cda599be9fff226924d075c3b09dad7b">00243</a>   <a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce5625cda599be9fff226924d075c3b09dad7b" title="Per vertex UV map 6 (float array).">CTM_UV_MAP_6</a>          = 0x0705, 
+<a name="l00244"></a><a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce56254ca0e7ec8e66c772f449be1f4749414b">00244</a>   <a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce56254ca0e7ec8e66c772f449be1f4749414b" title="Per vertex UV map 7 (float array).">CTM_UV_MAP_7</a>          = 0x0706, 
+<a name="l00245"></a><a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce5625eae61f9c3e9cded4a7f8059d0acc41a3">00245</a>   <a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce5625eae61f9c3e9cded4a7f8059d0acc41a3" title="Per vertex UV map 8 (float array).">CTM_UV_MAP_8</a>          = 0x0707, 
 <a name="l00246"></a><a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce562537c9dffce89ec51e9767e1f9a38e51bd">00246</a>   <a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce562537c9dffce89ec51e9767e1f9a38e51bd" title="Per vertex attribute map 1 (float array).">CTM_ATTRIB_MAP_1</a>      = 0x0800, 
 <a name="l00247"></a><a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce5625dc4a982b27a02157edff941636063827">00247</a>   <a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce5625dc4a982b27a02157edff941636063827" title="Per vertex attribute map 2 (float array).">CTM_ATTRIB_MAP_2</a>      = 0x0801, 
 <a name="l00248"></a><a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce5625d991095653802528246723d3ed82b532">00248</a>   <a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce5625d991095653802528246723d3ed82b532" title="Per vertex attribute map 3 (float array).">CTM_ATTRIB_MAP_3</a>      = 0x0802, 
@@ -177,101 +177,104 @@
 <a name="l00253"></a><a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce56252d749b6c2b0a1384c28ad19f491db31e">00253</a>   <a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce56252d749b6c2b0a1384c28ad19f491db31e" title="Per vertex attribute map 8 (float array).">CTM_ATTRIB_MAP_8</a>      = 0x0807  
 <a name="l00254"></a>00254 } <a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce5625" title="OpenCTM specific enumerators.">CTMenum</a>;
 <a name="l00255"></a>00255 
-<a name="l00263"></a><a class="code" href="openctm_8h.html#d2fb8fd3b5997a557d8aba2385ed849b">00263</a> <span class="keyword">typedef</span> <a class="code" href="openctm_8h.html#c5ea1beb64d415c241f2abf35eeb6c48" title="Unsigned integer (32 bits wide).">CTMuint</a> (CTMCALL * <a class="code" href="openctm_8h.html#d2fb8fd3b5997a557d8aba2385ed849b" title="Stream read() function pointer.">CTMreadfn</a>)(<span class="keywordtype">void</span> * aBuf, CTMuint aCount, <span class="keywordtype">void</span> * aUserData);
-<a name="l00264"></a>00264 
-<a name="l00272"></a><a class="code" href="openctm_8h.html#2428bc1bf2cf2e1af05d132dca892f5b">00272</a> <span class="keyword">typedef</span> <a class="code" href="openctm_8h.html#c5ea1beb64d415c241f2abf35eeb6c48" title="Unsigned integer (32 bits wide).">CTMuint</a> (CTMCALL * <a class="code" href="openctm_8h.html#2428bc1bf2cf2e1af05d132dca892f5b" title="Stream write() function pointer.">CTMwritefn</a>)(<span class="keyword">const</span> <span class="keywordtype">void</span> * aBuf, CTMuint aCount, <span class="keywordtype">void</span> * aUserData);
-<a name="l00273"></a>00273 
-<a name="l00280"></a>00280 CTMEXPORT CTMcontext CTMCALL <a class="code" href="openctm_8h.html#3ca20da713005b0c6afb9b5f21640837" title="Create a new OpenCTM context.">ctmNewContext</a>(<a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce5625" title="OpenCTM specific enumerators.">CTMenum</a> aMode);
-<a name="l00281"></a>00281 
-<a name="l00286"></a>00286 CTMEXPORT <span class="keywordtype">void</span> CTMCALL <a class="code" href="openctm_8h.html#eb16fd3054a19415be90de4968b21a3a" title="Free an OpenCTM context.">ctmFreeContext</a>(CTMcontext aContext);
-<a name="l00287"></a>00287 
-<a name="l00296"></a>00296 CTMEXPORT <a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce5625" title="OpenCTM specific enumerators.">CTMenum</a> CTMCALL <a class="code" href="openctm_8h.html#2bbaed33a6809affc4a61469f6676bdf" title="Returns the latest error.">ctmGetError</a>(CTMcontext aContext);
-<a name="l00297"></a>00297 
-<a name="l00304"></a>00304 CTMEXPORT <span class="keyword">const</span> <span class="keywordtype">char</span> * CTMCALL <a class="code" href="openctm_8h.html#3071b834da6a9cdd684ec733de70cbf2" title="Converts an OpenCTM error code to a zero-terminated string.">ctmErrorString</a>(<a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce5625" title="OpenCTM specific enumerators.">CTMenum</a> aError);
-<a name="l00305"></a>00305 
-<a name="l00313"></a>00313 CTMEXPORT CTMuint CTMCALL <a class="code" href="openctm_8h.html#4012ac28aa780819e40ee118d7c6578e" title="Get information about an OpenCTM context.">ctmGetInteger</a>(CTMcontext aContext, <a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce5625" title="OpenCTM specific enumerators.">CTMenum</a> aProperty);
-<a name="l00314"></a>00314 
-<a name="l00322"></a>00322 CTMEXPORT CTMfloat CTMCALL <a class="code" href="openctm_8h.html#be7389b3a396a86a3a1c5d5c6f68183d" title="Get information about an OpenCTM context.">ctmGetFloat</a>(CTMcontext aContext, <a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce5625" title="OpenCTM specific enumerators.">CTMenum</a> aProperty);
-<a name="l00323"></a>00323 
-<a name="l00338"></a>00338 CTMEXPORT <span class="keyword">const</span> CTMuint * CTMCALL <a class="code" href="openctm_8h.html#e202716acce7a97668654052dc4d0bef" title="Get an integer array from an OpenCTM context.">ctmGetIntegerArray</a>(CTMcontext aContext,
-<a name="l00339"></a>00339   <a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce5625" title="OpenCTM specific enumerators.">CTMenum</a> aProperty);
-<a name="l00340"></a>00340 
-<a name="l00355"></a>00355 CTMEXPORT <span class="keyword">const</span> CTMfloat * CTMCALL <a class="code" href="openctm_8h.html#bdfcfede5d37c75e78cae989dc71e248" title="Get a floating point array from an OpenCTM context.">ctmGetFloatArray</a>(CTMcontext aContext,
-<a name="l00356"></a>00356   <a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce5625" title="OpenCTM specific enumerators.">CTMenum</a> aProperty);
-<a name="l00357"></a>00357 
-<a name="l00365"></a>00365 CTMEXPORT <a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce5625" title="OpenCTM specific enumerators.">CTMenum</a> CTMCALL <a class="code" href="openctm_8h.html#3432043aa8279e9029a68cd65e9ebe7c" title="Get a reference to the named texture map.">ctmGetNamedTexMap</a>(CTMcontext aContext,
-<a name="l00366"></a>00366   <span class="keyword">const</span> <span class="keywordtype">char</span> * aName);
-<a name="l00367"></a>00367 
-<a name="l00381"></a>00381 CTMEXPORT <span class="keyword">const</span> <span class="keywordtype">char</span> * CTMCALL <a class="code" href="openctm_8h.html#63472fa096b5c41d9f9684ada190702a" title="Get information about a texture map.">ctmGetTexMapString</a>(CTMcontext aContext,
-<a name="l00382"></a>00382   <a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce5625" title="OpenCTM specific enumerators.">CTMenum</a> aTexMap, <a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce5625" title="OpenCTM specific enumerators.">CTMenum</a> aProperty);
-<a name="l00383"></a>00383 
-<a name="l00392"></a>00392 CTMEXPORT CTMfloat CTMCALL <a class="code" href="openctm_8h.html#9194d7a412575ef2900a2631f930123b" title="Get information about a texture map.">ctmGetTexMapFloat</a>(CTMcontext aContext,
-<a name="l00393"></a>00393   <a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce5625" title="OpenCTM specific enumerators.">CTMenum</a> aTexMap, <a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce5625" title="OpenCTM specific enumerators.">CTMenum</a> aProperty);
-<a name="l00394"></a>00394 
-<a name="l00402"></a>00402 CTMEXPORT <a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce5625" title="OpenCTM specific enumerators.">CTMenum</a> CTMCALL <a class="code" href="openctm_8h.html#15692de5d6e93adf8bed8d06d88c905c" title="Get a reference to the named vertex attribute map.">ctmGetNamedAttribMap</a>(CTMcontext aContext,
-<a name="l00403"></a>00403   <span class="keyword">const</span> <span class="keywordtype">char</span> * aName);
-<a name="l00404"></a>00404 
-<a name="l00419"></a>00419 CTMEXPORT <span class="keyword">const</span> <span class="keywordtype">char</span> * CTMCALL <a class="code" href="openctm_8h.html#841d7c1e0bafd57ee36ccbbc74470b68" title="Get information about a vertex attribute map.">ctmGetAttribMapString</a>(CTMcontext aContext,
-<a name="l00420"></a>00420   <a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce5625" title="OpenCTM specific enumerators.">CTMenum</a> aAttribMap, <a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce5625" title="OpenCTM specific enumerators.">CTMenum</a> aProperty);
-<a name="l00421"></a>00421 
-<a name="l00431"></a>00431 CTMEXPORT CTMfloat CTMCALL <a class="code" href="openctm_8h.html#7c297f9b6d486f47596cff184602a65d" title="Get information about a vertex attribute map.">ctmGetAttribMapFloat</a>(CTMcontext aContext,
-<a name="l00432"></a>00432   <a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce5625" title="OpenCTM specific enumerators.">CTMenum</a> aAttribMap, <a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce5625" title="OpenCTM specific enumerators.">CTMenum</a> aProperty);
-<a name="l00433"></a>00433 
-<a name="l00448"></a>00448 CTMEXPORT <span class="keyword">const</span> <span class="keywordtype">char</span> * CTMCALL <a class="code" href="openctm_8h.html#4e4269df157eb2d117259c69a331e339" title="Get information about an OpenCTM context.">ctmGetString</a>(CTMcontext aContext,
-<a name="l00449"></a>00449   <a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce5625" title="OpenCTM specific enumerators.">CTMenum</a> aProperty);
-<a name="l00450"></a>00450 
-<a name="l00460"></a>00460 CTMEXPORT <span class="keywordtype">void</span> CTMCALL <a class="code" href="openctm_8h.html#f4ac8e534f59be4edacc39753cf54693" title="Set which compression method to use for the given OpenCTM context.">ctmCompressionMethod</a>(CTMcontext aContext,
-<a name="l00461"></a>00461   <a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce5625" title="OpenCTM specific enumerators.">CTMenum</a> aMethod);
-<a name="l00462"></a>00462 
-<a name="l00470"></a>00470 CTMEXPORT <span class="keywordtype">void</span> CTMCALL <a class="code" href="openctm_8h.html#f4191357f51161a16ff886d18ec848d8" title="Set the vertex coordinate precision (only used by the MG2 compression method).">ctmVertexPrecision</a>(CTMcontext aContext,
-<a name="l00471"></a>00471   CTMfloat aPrecision);
-<a name="l00472"></a>00472 
-<a name="l00485"></a>00485 CTMEXPORT <span class="keywordtype">void</span> CTMCALL <a class="code" href="openctm_8h.html#de23eb25fa9d5cd1d932bc1203476f27" title="Set the vertex coordinate precision, relative to the mesh dimensions (only used by...">ctmVertexPrecisionRel</a>(CTMcontext aContext,
-<a name="l00486"></a>00486   CTMfloat aRelPrecision);
-<a name="l00487"></a>00487 
-<a name="l00499"></a>00499 CTMEXPORT <span class="keywordtype">void</span> CTMCALL <a class="code" href="openctm_8h.html#07d8b47a0e642d0d8c77cf18e8d354a5" title="Set the normal precision (only used by the MG2 compression method).">ctmNormalPrecision</a>(CTMcontext aContext,
-<a name="l00500"></a>00500   CTMfloat aPrecision);
-<a name="l00501"></a>00501 
-<a name="l00512"></a>00512 CTMEXPORT <span class="keywordtype">void</span> CTMCALL <a class="code" href="openctm_8h.html#48ce36d94459eef641e7bf11ce5898fc" title="Set the texture coordinate precision for the specified texture map (only used by...">ctmTexCoordPrecision</a>(CTMcontext aContext,
-<a name="l00513"></a>00513   <a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce5625" title="OpenCTM specific enumerators.">CTMenum</a> aTexMap, CTMfloat aPrecision);
-<a name="l00514"></a>00514 
-<a name="l00526"></a>00526 CTMEXPORT <span class="keywordtype">void</span> CTMCALL <a class="code" href="openctm_8h.html#8af7af38bd9340838b43805b81698777" title="Set the attribute value precision for the specified attribute map (only used by the...">ctmAttribPrecision</a>(CTMcontext aContext,
-<a name="l00527"></a>00527   <a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce5625" title="OpenCTM specific enumerators.">CTMenum</a> aAttribMap, CTMfloat aPrecision);
-<a name="l00528"></a>00528 
-<a name="l00533"></a>00533 CTMEXPORT <span class="keywordtype">void</span> CTMCALL <a class="code" href="openctm_8h.html#2225924b06488421ee6b9a8505782a25" title="Set the file comment for the given OpenCTM context.">ctmFileComment</a>(CTMcontext aContext,
-<a name="l00534"></a>00534   <span class="keyword">const</span> <span class="keywordtype">char</span> * aFileComment);
-<a name="l00535"></a>00535 
-<a name="l00551"></a>00551 CTMEXPORT <span class="keywordtype">void</span> CTMCALL <a class="code" href="openctm_8h.html#1cb648e89121ae67f5a8b9e5a8f41c4d" title="Define a triangle mesh.">ctmDefineMesh</a>(CTMcontext aContext,
-<a name="l00552"></a>00552   <span class="keyword">const</span> CTMfloat * aVertices, CTMuint aVertexCount, <span class="keyword">const</span> CTMuint * aIndices,
-<a name="l00553"></a>00553   CTMuint aTriangleCount, <span class="keyword">const</span> CTMfloat * aNormals);
-<a name="l00554"></a>00554 
-<a name="l00576"></a>00576 CTMEXPORT <a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce5625" title="OpenCTM specific enumerators.">CTMenum</a> CTMCALL <a class="code" href="openctm_8h.html#cea1fa2e9e45da70032a0b994acfef35" title="Define a texture map.">ctmAddTexMap</a>(CTMcontext aContext,
-<a name="l00577"></a>00577   <span class="keyword">const</span> CTMfloat * aTexCoords, <span class="keyword">const</span> <span class="keywordtype">char</span> * aName, <span class="keyword">const</span> <span class="keywordtype">char</span> * aFileName);
-<a name="l00578"></a>00578 
-<a name="l00596"></a>00596 CTMEXPORT <a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce5625" title="OpenCTM specific enumerators.">CTMenum</a> CTMCALL <a class="code" href="openctm_8h.html#920a8fed6bef834db0b241fc5c9bba03" title="Define a custom vertex attribute map.">ctmAddAttribMap</a>(CTMcontext aContext,
-<a name="l00597"></a>00597   <span class="keyword">const</span> CTMfloat * aAttribValues, <span class="keyword">const</span> <span class="keywordtype">char</span> * aName);
-<a name="l00598"></a>00598 
-<a name="l00604"></a>00604 CTMEXPORT <span class="keywordtype">void</span> CTMCALL <a class="code" href="openctm_8h.html#99a57706d438c5654adbc9646058dc01" title="Load an OpenCTM format file into the context.">ctmLoad</a>(CTMcontext aContext, <span class="keyword">const</span> <span class="keywordtype">char</span> * aFileName);
-<a name="l00605"></a>00605 
-<a name="l00616"></a>00616 CTMEXPORT <span class="keywordtype">void</span> CTMCALL <a class="code" href="openctm_8h.html#99699bcbd4cbe0942a22498671af107e" title="Load an OpenCTM format file using a custom stream read function.">ctmLoadCustom</a>(CTMcontext aContext, <a class="code" href="openctm_8h.html#d2fb8fd3b5997a557d8aba2385ed849b" title="Stream read() function pointer.">CTMreadfn</a> aReadFn,
-<a name="l00617"></a>00617   <span class="keywordtype">void</span> * aUserData);
-<a name="l00618"></a>00618 
-<a name="l00624"></a>00624 CTMEXPORT <span class="keywordtype">void</span> CTMCALL <a class="code" href="openctm_8h.html#cde994008b0b3321bad9f3bbfacb12db" title="Save an OpenCTM format file.">ctmSave</a>(CTMcontext aContext, <span class="keyword">const</span> <span class="keywordtype">char</span> * aFileName);
-<a name="l00625"></a>00625 
-<a name="l00636"></a>00636 CTMEXPORT <span class="keywordtype">void</span> CTMCALL <a class="code" href="openctm_8h.html#7e62ca5548a34ed0e126fd4f7b77ef3f" title="Save an OpenCTM format file using a custom stream write function.">ctmSaveCustom</a>(CTMcontext aContext, <a class="code" href="openctm_8h.html#2428bc1bf2cf2e1af05d132dca892f5b" title="Stream write() function pointer.">CTMwritefn</a> aWriteFn,
-<a name="l00637"></a>00637   <span class="keywordtype">void</span> * aUserData);
-<a name="l00638"></a>00638 
-<a name="l00639"></a>00639 <span class="preprocessor">#ifdef __cplusplus</span>
-<a name="l00640"></a>00640 <span class="preprocessor"></span>}
-<a name="l00641"></a>00641 <span class="preprocessor">#endif</span>
-<a name="l00642"></a>00642 <span class="preprocessor"></span>
-<a name="l00643"></a>00643 
-<a name="l00644"></a>00644 <span class="comment">// C++ extensions to the API</span>
+<a name="l00264"></a><a class="code" href="openctm_8h.html#d2fb8fd3b5997a557d8aba2385ed849b">00264</a> <span class="keyword">typedef</span> <a class="code" href="openctm_8h.html#c5ea1beb64d415c241f2abf35eeb6c48" title="Unsigned integer (32 bits wide).">CTMuint</a> (CTMCALL * <a class="code" href="openctm_8h.html#d2fb8fd3b5997a557d8aba2385ed849b" title="Stream read() function pointer.">CTMreadfn</a>)(<span class="keywordtype">void</span> * aBuf, CTMuint aCount, <span class="keywordtype">void</span> * aUserData);
+<a name="l00265"></a>00265 
+<a name="l00273"></a><a class="code" href="openctm_8h.html#2428bc1bf2cf2e1af05d132dca892f5b">00273</a> <span class="keyword">typedef</span> <a class="code" href="openctm_8h.html#c5ea1beb64d415c241f2abf35eeb6c48" title="Unsigned integer (32 bits wide).">CTMuint</a> (CTMCALL * <a class="code" href="openctm_8h.html#2428bc1bf2cf2e1af05d132dca892f5b" title="Stream write() function pointer.">CTMwritefn</a>)(<span class="keyword">const</span> <span class="keywordtype">void</span> * aBuf, CTMuint aCount, <span class="keywordtype">void</span> * aUserData);
+<a name="l00274"></a>00274 
+<a name="l00281"></a>00281 CTMEXPORT CTMcontext CTMCALL <a class="code" href="openctm_8h.html#3ca20da713005b0c6afb9b5f21640837" title="Create a new OpenCTM context.">ctmNewContext</a>(<a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce5625" title="OpenCTM specific enumerators.">CTMenum</a> aMode);
+<a name="l00282"></a>00282 
+<a name="l00287"></a>00287 CTMEXPORT <span class="keywordtype">void</span> CTMCALL <a class="code" href="openctm_8h.html#eb16fd3054a19415be90de4968b21a3a" title="Free an OpenCTM context.">ctmFreeContext</a>(CTMcontext aContext);
+<a name="l00288"></a>00288 
+<a name="l00297"></a>00297 CTMEXPORT <a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce5625" title="OpenCTM specific enumerators.">CTMenum</a> CTMCALL <a class="code" href="openctm_8h.html#2bbaed33a6809affc4a61469f6676bdf" title="Returns the latest error.">ctmGetError</a>(CTMcontext aContext);
+<a name="l00298"></a>00298 
+<a name="l00305"></a>00305 CTMEXPORT <span class="keyword">const</span> <span class="keywordtype">char</span> * CTMCALL <a class="code" href="openctm_8h.html#3071b834da6a9cdd684ec733de70cbf2" title="Converts an OpenCTM error code to a zero-terminated string.">ctmErrorString</a>(<a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce5625" title="OpenCTM specific enumerators.">CTMenum</a> aError);
+<a name="l00306"></a>00306 
+<a name="l00314"></a>00314 CTMEXPORT CTMuint CTMCALL <a class="code" href="openctm_8h.html#4012ac28aa780819e40ee118d7c6578e" title="Get information about an OpenCTM context.">ctmGetInteger</a>(CTMcontext aContext, <a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce5625" title="OpenCTM specific enumerators.">CTMenum</a> aProperty);
+<a name="l00315"></a>00315 
+<a name="l00323"></a>00323 CTMEXPORT CTMfloat CTMCALL <a class="code" href="openctm_8h.html#be7389b3a396a86a3a1c5d5c6f68183d" title="Get information about an OpenCTM context.">ctmGetFloat</a>(CTMcontext aContext, <a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce5625" title="OpenCTM specific enumerators.">CTMenum</a> aProperty);
+<a name="l00324"></a>00324 
+<a name="l00339"></a>00339 CTMEXPORT <span class="keyword">const</span> CTMuint * CTMCALL <a class="code" href="openctm_8h.html#e202716acce7a97668654052dc4d0bef" title="Get an integer array from an OpenCTM context.">ctmGetIntegerArray</a>(CTMcontext aContext,
+<a name="l00340"></a>00340   <a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce5625" title="OpenCTM specific enumerators.">CTMenum</a> aProperty);
+<a name="l00341"></a>00341 
+<a name="l00356"></a>00356 CTMEXPORT <span class="keyword">const</span> CTMfloat * CTMCALL <a class="code" href="openctm_8h.html#bdfcfede5d37c75e78cae989dc71e248" title="Get a floating point array from an OpenCTM context.">ctmGetFloatArray</a>(CTMcontext aContext,
+<a name="l00357"></a>00357   <a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce5625" title="OpenCTM specific enumerators.">CTMenum</a> aProperty);
+<a name="l00358"></a>00358 
+<a name="l00366"></a>00366 CTMEXPORT <a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce5625" title="OpenCTM specific enumerators.">CTMenum</a> CTMCALL <a class="code" href="openctm_8h.html#43c2d19741ba53f695a4119e594d6069" title="Get a reference to the named UV map.">ctmGetNamedUVMap</a>(CTMcontext aContext,
+<a name="l00367"></a>00367   <span class="keyword">const</span> <span class="keywordtype">char</span> * aName);
+<a name="l00368"></a>00368 
+<a name="l00382"></a>00382 CTMEXPORT <span class="keyword">const</span> <span class="keywordtype">char</span> * CTMCALL <a class="code" href="openctm_8h.html#2d689ee3371296b68899d564d5a1f998" title="Get information about a UV map.">ctmGetUVMapString</a>(CTMcontext aContext,
+<a name="l00383"></a>00383   <a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce5625" title="OpenCTM specific enumerators.">CTMenum</a> aUVMap, <a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce5625" title="OpenCTM specific enumerators.">CTMenum</a> aProperty);
+<a name="l00384"></a>00384 
+<a name="l00393"></a>00393 CTMEXPORT CTMfloat CTMCALL <a class="code" href="openctm_8h.html#fad1b100b9f2fe4bf0dfc36cb39ec615" title="Get information about a UV map.">ctmGetUVMapFloat</a>(CTMcontext aContext,
+<a name="l00394"></a>00394   <a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce5625" title="OpenCTM specific enumerators.">CTMenum</a> aUVMap, <a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce5625" title="OpenCTM specific enumerators.">CTMenum</a> aProperty);
+<a name="l00395"></a>00395 
+<a name="l00403"></a>00403 CTMEXPORT <a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce5625" title="OpenCTM specific enumerators.">CTMenum</a> CTMCALL <a class="code" href="openctm_8h.html#15692de5d6e93adf8bed8d06d88c905c" title="Get a reference to the named vertex attribute map.">ctmGetNamedAttribMap</a>(CTMcontext aContext,
+<a name="l00404"></a>00404   <span class="keyword">const</span> <span class="keywordtype">char</span> * aName);
+<a name="l00405"></a>00405 
+<a name="l00420"></a>00420 CTMEXPORT <span class="keyword">const</span> <span class="keywordtype">char</span> * CTMCALL <a class="code" href="openctm_8h.html#841d7c1e0bafd57ee36ccbbc74470b68" title="Get information about a vertex attribute map.">ctmGetAttribMapString</a>(CTMcontext aContext,
+<a name="l00421"></a>00421   <a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce5625" title="OpenCTM specific enumerators.">CTMenum</a> aAttribMap, <a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce5625" title="OpenCTM specific enumerators.">CTMenum</a> aProperty);
+<a name="l00422"></a>00422 
+<a name="l00432"></a>00432 CTMEXPORT CTMfloat CTMCALL <a class="code" href="openctm_8h.html#7c297f9b6d486f47596cff184602a65d" title="Get information about a vertex attribute map.">ctmGetAttribMapFloat</a>(CTMcontext aContext,
+<a name="l00433"></a>00433   <a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce5625" title="OpenCTM specific enumerators.">CTMenum</a> aAttribMap, <a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce5625" title="OpenCTM specific enumerators.">CTMenum</a> aProperty);
+<a name="l00434"></a>00434 
+<a name="l00449"></a>00449 CTMEXPORT <span class="keyword">const</span> <span class="keywordtype">char</span> * CTMCALL <a class="code" href="openctm_8h.html#4e4269df157eb2d117259c69a331e339" title="Get information about an OpenCTM context.">ctmGetString</a>(CTMcontext aContext,
+<a name="l00450"></a>00450   <a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce5625" title="OpenCTM specific enumerators.">CTMenum</a> aProperty);
+<a name="l00451"></a>00451 
+<a name="l00461"></a>00461 CTMEXPORT <span class="keywordtype">void</span> CTMCALL <a class="code" href="openctm_8h.html#f4ac8e534f59be4edacc39753cf54693" title="Set which compression method to use for the given OpenCTM context.">ctmCompressionMethod</a>(CTMcontext aContext,
+<a name="l00462"></a>00462   <a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce5625" title="OpenCTM specific enumerators.">CTMenum</a> aMethod);
+<a name="l00463"></a>00463 
+<a name="l00471"></a>00471 CTMEXPORT <span class="keywordtype">void</span> CTMCALL <a class="code" href="openctm_8h.html#a2902c49b904a7557fdd012e303c720e" title="Set which LZMA compression level to use for the given OpenCTM context.">ctmCompressionLevel</a>(CTMcontext aContext,
+<a name="l00472"></a>00472   CTMuint aLevel);
+<a name="l00473"></a>00473 
+<a name="l00481"></a>00481 CTMEXPORT <span class="keywordtype">void</span> CTMCALL <a class="code" href="openctm_8h.html#f4191357f51161a16ff886d18ec848d8" title="Set the vertex coordinate precision (only used by the MG2 compression method).">ctmVertexPrecision</a>(CTMcontext aContext,
+<a name="l00482"></a>00482   CTMfloat aPrecision);
+<a name="l00483"></a>00483 
+<a name="l00496"></a>00496 CTMEXPORT <span class="keywordtype">void</span> CTMCALL <a class="code" href="openctm_8h.html#de23eb25fa9d5cd1d932bc1203476f27" title="Set the vertex coordinate precision, relative to the mesh dimensions (only used by...">ctmVertexPrecisionRel</a>(CTMcontext aContext,
+<a name="l00497"></a>00497   CTMfloat aRelPrecision);
+<a name="l00498"></a>00498 
+<a name="l00510"></a>00510 CTMEXPORT <span class="keywordtype">void</span> CTMCALL <a class="code" href="openctm_8h.html#07d8b47a0e642d0d8c77cf18e8d354a5" title="Set the normal precision (only used by the MG2 compression method).">ctmNormalPrecision</a>(CTMcontext aContext,
+<a name="l00511"></a>00511   CTMfloat aPrecision);
+<a name="l00512"></a>00512 
+<a name="l00523"></a>00523 CTMEXPORT <span class="keywordtype">void</span> CTMCALL <a class="code" href="openctm_8h.html#c1a75abbf04281acaff4f6f1f9516039" title="Set the coordinate precision for the specified UV map (only used by the MG2 compression...">ctmUVCoordPrecision</a>(CTMcontext aContext,
+<a name="l00524"></a>00524   <a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce5625" title="OpenCTM specific enumerators.">CTMenum</a> aUVMap, CTMfloat aPrecision);
+<a name="l00525"></a>00525 
+<a name="l00537"></a>00537 CTMEXPORT <span class="keywordtype">void</span> CTMCALL <a class="code" href="openctm_8h.html#8af7af38bd9340838b43805b81698777" title="Set the attribute value precision for the specified attribute map (only used by the...">ctmAttribPrecision</a>(CTMcontext aContext,
+<a name="l00538"></a>00538   <a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce5625" title="OpenCTM specific enumerators.">CTMenum</a> aAttribMap, CTMfloat aPrecision);
+<a name="l00539"></a>00539 
+<a name="l00544"></a>00544 CTMEXPORT <span class="keywordtype">void</span> CTMCALL <a class="code" href="openctm_8h.html#2225924b06488421ee6b9a8505782a25" title="Set the file comment for the given OpenCTM context.">ctmFileComment</a>(CTMcontext aContext,
+<a name="l00545"></a>00545   <span class="keyword">const</span> <span class="keywordtype">char</span> * aFileComment);
+<a name="l00546"></a>00546 
+<a name="l00562"></a>00562 CTMEXPORT <span class="keywordtype">void</span> CTMCALL <a class="code" href="openctm_8h.html#1cb648e89121ae67f5a8b9e5a8f41c4d" title="Define a triangle mesh.">ctmDefineMesh</a>(CTMcontext aContext,
+<a name="l00563"></a>00563   <span class="keyword">const</span> CTMfloat * aVertices, CTMuint aVertexCount, <span class="keyword">const</span> CTMuint * aIndices,
+<a name="l00564"></a>00564   CTMuint aTriangleCount, <span class="keyword">const</span> CTMfloat * aNormals);
+<a name="l00565"></a>00565 
+<a name="l00583"></a>00583 CTMEXPORT <a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce5625" title="OpenCTM specific enumerators.">CTMenum</a> CTMCALL <a class="code" href="openctm_8h.html#44345560299ac49dfd502d0470f05e0f" title="Define a UV map.">ctmAddUVMap</a>(CTMcontext aContext,
+<a name="l00584"></a>00584   <span class="keyword">const</span> CTMfloat * aUVCoords, <span class="keyword">const</span> <span class="keywordtype">char</span> * aName, <span class="keyword">const</span> <span class="keywordtype">char</span> * aFileName);
+<a name="l00585"></a>00585 
+<a name="l00602"></a>00602 CTMEXPORT <a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce5625" title="OpenCTM specific enumerators.">CTMenum</a> CTMCALL <a class="code" href="openctm_8h.html#920a8fed6bef834db0b241fc5c9bba03" title="Define a custom vertex attribute map.">ctmAddAttribMap</a>(CTMcontext aContext,
+<a name="l00603"></a>00603   <span class="keyword">const</span> CTMfloat * aAttribValues, <span class="keyword">const</span> <span class="keywordtype">char</span> * aName);
+<a name="l00604"></a>00604 
+<a name="l00610"></a>00610 CTMEXPORT <span class="keywordtype">void</span> CTMCALL <a class="code" href="openctm_8h.html#99a57706d438c5654adbc9646058dc01" title="Load an OpenCTM format file into the context.">ctmLoad</a>(CTMcontext aContext, <span class="keyword">const</span> <span class="keywordtype">char</span> * aFileName);
+<a name="l00611"></a>00611 
+<a name="l00622"></a>00622 CTMEXPORT <span class="keywordtype">void</span> CTMCALL <a class="code" href="openctm_8h.html#99699bcbd4cbe0942a22498671af107e" title="Load an OpenCTM format file using a custom stream read function.">ctmLoadCustom</a>(CTMcontext aContext, <a class="code" href="openctm_8h.html#d2fb8fd3b5997a557d8aba2385ed849b" title="Stream read() function pointer.">CTMreadfn</a> aReadFn,
+<a name="l00623"></a>00623   <span class="keywordtype">void</span> * aUserData);
+<a name="l00624"></a>00624 
+<a name="l00630"></a>00630 CTMEXPORT <span class="keywordtype">void</span> CTMCALL <a class="code" href="openctm_8h.html#cde994008b0b3321bad9f3bbfacb12db" title="Save an OpenCTM format file.">ctmSave</a>(CTMcontext aContext, <span class="keyword">const</span> <span class="keywordtype">char</span> * aFileName);
+<a name="l00631"></a>00631 
+<a name="l00642"></a>00642 CTMEXPORT <span class="keywordtype">void</span> CTMCALL <a class="code" href="openctm_8h.html#7e62ca5548a34ed0e126fd4f7b77ef3f" title="Save an OpenCTM format file using a custom stream write function.">ctmSaveCustom</a>(CTMcontext aContext, <a class="code" href="openctm_8h.html#2428bc1bf2cf2e1af05d132dca892f5b" title="Stream write() function pointer.">CTMwritefn</a> aWriteFn,
+<a name="l00643"></a>00643   <span class="keywordtype">void</span> * aUserData);
+<a name="l00644"></a>00644 
 <a name="l00645"></a>00645 <span class="preprocessor">#ifdef __cplusplus</span>
-<a name="l00646"></a>00646 <span class="preprocessor"></span><span class="preprocessor">#include "<a class="code" href="openctmpp_8h.html">openctmpp.h</a>"</span>
+<a name="l00646"></a>00646 <span class="preprocessor"></span>}
 <a name="l00647"></a>00647 <span class="preprocessor">#endif</span>
 <a name="l00648"></a>00648 <span class="preprocessor"></span>
-<a name="l00649"></a>00649 <span class="preprocessor">#endif // __OPENCTM_H_</span>
+<a name="l00649"></a>00649 
+<a name="l00650"></a>00650 <span class="comment">// C++ extensions to the API</span>
+<a name="l00651"></a>00651 <span class="preprocessor">#ifdef __cplusplus</span>
+<a name="l00652"></a>00652 <span class="preprocessor"></span><span class="preprocessor">#include "<a class="code" href="openctmpp_8h.html">openctmpp.h</a>"</span>
+<a name="l00653"></a>00653 <span class="preprocessor">#endif</span>
+<a name="l00654"></a>00654 <span class="preprocessor"></span>
+<a name="l00655"></a>00655 <span class="preprocessor">#endif // __OPENCTM_H_</span>
 </pre></div></div>
 <div style="padding: 1em 1em 0.5em 1em; margin: 2em 0 0 0; border-top: 1px solid #84b0c7; color: #808080; text-align: center;">
   <p>Copyright &copy; 2009 Marcus Geelnard &mdash;

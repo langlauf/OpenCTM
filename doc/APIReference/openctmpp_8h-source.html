@@ -130,23 +130,23 @@
 <a name="l00140"></a>00140       <span class="keywordflow">return</span> res;
 <a name="l00141"></a>00141     }
 <a name="l00142"></a>00142 
-<a name="l00144"></a><a class="code" href="classCTMimporter.html#1bf85d58f0083cad2e15b9be7d92b031">00144</a>     <a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce5625" title="OpenCTM specific enumerators.">CTMenum</a> <a class="code" href="classCTMimporter.html#1bf85d58f0083cad2e15b9be7d92b031" title="Wrapper for ctmGetNamedTexMap().">GetNamedTexMap</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> * aName)
+<a name="l00144"></a><a class="code" href="classCTMimporter.html#315d0ac280b74afa832b09c5850d6c59">00144</a>     <a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce5625" title="OpenCTM specific enumerators.">CTMenum</a> <a class="code" href="classCTMimporter.html#315d0ac280b74afa832b09c5850d6c59" title="Wrapper for ctmGetNamedUVMap().">GetNamedUVMap</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> * aName)
 <a name="l00145"></a>00145     {
-<a name="l00146"></a>00146       <a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce5625" title="OpenCTM specific enumerators.">CTMenum</a> res = <a class="code" href="openctm_8h.html#3432043aa8279e9029a68cd65e9ebe7c" title="Get a reference to the named texture map.">ctmGetNamedTexMap</a>(mContext, aName);
+<a name="l00146"></a>00146       <a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce5625" title="OpenCTM specific enumerators.">CTMenum</a> res = <a class="code" href="openctm_8h.html#43c2d19741ba53f695a4119e594d6069" title="Get a reference to the named UV map.">ctmGetNamedUVMap</a>(mContext, aName);
 <a name="l00147"></a>00147       CheckError();
 <a name="l00148"></a>00148       <span class="keywordflow">return</span> res;
 <a name="l00149"></a>00149     }
 <a name="l00150"></a>00150 
-<a name="l00152"></a><a class="code" href="classCTMimporter.html#50b39551d4a51f3a6118245d16ef220a">00152</a>     <span class="keyword">const</span> <span class="keywordtype">char</span> * <a class="code" href="classCTMimporter.html#50b39551d4a51f3a6118245d16ef220a" title="Wrapper for ctmGetTexMapString().">GetTexMapString</a>(<a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce5625" title="OpenCTM specific enumerators.">CTMenum</a> aTexMap, <a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce5625" title="OpenCTM specific enumerators.">CTMenum</a> aProperty)
+<a name="l00152"></a><a class="code" href="classCTMimporter.html#223ee89a56c1151291321b74c0dc69ea">00152</a>     <span class="keyword">const</span> <span class="keywordtype">char</span> * <a class="code" href="classCTMimporter.html#223ee89a56c1151291321b74c0dc69ea" title="Wrapper for ctmGetUVMapString().">GetUVMapString</a>(<a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce5625" title="OpenCTM specific enumerators.">CTMenum</a> aUVMap, <a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce5625" title="OpenCTM specific enumerators.">CTMenum</a> aProperty)
 <a name="l00153"></a>00153     {
-<a name="l00154"></a>00154       <span class="keyword">const</span> <span class="keywordtype">char</span> * res = <a class="code" href="openctm_8h.html#63472fa096b5c41d9f9684ada190702a" title="Get information about a texture map.">ctmGetTexMapString</a>(mContext, aTexMap, aProperty);
+<a name="l00154"></a>00154       <span class="keyword">const</span> <span class="keywordtype">char</span> * res = <a class="code" href="openctm_8h.html#2d689ee3371296b68899d564d5a1f998" title="Get information about a UV map.">ctmGetUVMapString</a>(mContext, aUVMap, aProperty);
 <a name="l00155"></a>00155       CheckError();
 <a name="l00156"></a>00156       <span class="keywordflow">return</span> res;
 <a name="l00157"></a>00157     }
 <a name="l00158"></a>00158 
-<a name="l00160"></a><a class="code" href="classCTMimporter.html#01898147c9fa2c07c0cdc7a2e6fb7baf">00160</a>     <a class="code" href="openctm_8h.html#f8b7eeaefac4d6ad39d11c3f7be8afa2" title="Single precision floating point type (IEEE 754 32 bits wide).">CTMfloat</a> <a class="code" href="classCTMimporter.html#01898147c9fa2c07c0cdc7a2e6fb7baf" title="Wrapper for ctmGetTexMapFloat().">GetTexMapFloat</a>(<a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce5625" title="OpenCTM specific enumerators.">CTMenum</a> aTexMap, <a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce5625" title="OpenCTM specific enumerators.">CTMenum</a> aProperty)
+<a name="l00160"></a><a class="code" href="classCTMimporter.html#e331cb506a75e1605fa5955dd6f4f1e6">00160</a>     <a class="code" href="openctm_8h.html#f8b7eeaefac4d6ad39d11c3f7be8afa2" title="Single precision floating point type (IEEE 754 32 bits wide).">CTMfloat</a> <a class="code" href="classCTMimporter.html#e331cb506a75e1605fa5955dd6f4f1e6" title="Wrapper for ctmGetUVMapFloat().">GetUVMapFloat</a>(<a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce5625" title="OpenCTM specific enumerators.">CTMenum</a> aUVMap, <a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce5625" title="OpenCTM specific enumerators.">CTMenum</a> aProperty)
 <a name="l00161"></a>00161     {
-<a name="l00162"></a>00162       <a class="code" href="openctm_8h.html#f8b7eeaefac4d6ad39d11c3f7be8afa2" title="Single precision floating point type (IEEE 754 32 bits wide).">CTMfloat</a> res = <a class="code" href="openctm_8h.html#9194d7a412575ef2900a2631f930123b" title="Get information about a texture map.">ctmGetTexMapFloat</a>(mContext, aTexMap, aProperty);
+<a name="l00162"></a>00162       <a class="code" href="openctm_8h.html#f8b7eeaefac4d6ad39d11c3f7be8afa2" title="Single precision floating point type (IEEE 754 32 bits wide).">CTMfloat</a> res = <a class="code" href="openctm_8h.html#fad1b100b9f2fe4bf0dfc36cb39ec615" title="Get information about a UV map.">ctmGetUVMapFloat</a>(mContext, aUVMap, aProperty);
 <a name="l00163"></a>00163       CheckError();
 <a name="l00164"></a>00164       <span class="keywordflow">return</span> res;
 <a name="l00165"></a>00165     }
@@ -229,87 +229,93 @@
 <a name="l00271"></a>00271       CheckError();
 <a name="l00272"></a>00272     }
 <a name="l00273"></a>00273 
-<a name="l00275"></a><a class="code" href="classCTMexporter.html#137df10c84b6feb8b3c54360f077220a">00275</a>     <span class="keywordtype">void</span> <a class="code" href="classCTMexporter.html#137df10c84b6feb8b3c54360f077220a" title="Wrapper for ctmVertexPrecision().">VertexPrecision</a>(<a class="code" href="openctm_8h.html#f8b7eeaefac4d6ad39d11c3f7be8afa2" title="Single precision floating point type (IEEE 754 32 bits wide).">CTMfloat</a> aPrecision)
+<a name="l00275"></a><a class="code" href="classCTMexporter.html#b2a81044568d7503e8d0f0272c855113">00275</a>     <span class="keywordtype">void</span> <a class="code" href="classCTMexporter.html#b2a81044568d7503e8d0f0272c855113" title="Wrapper for ctmCompressionLevel().">CompressionLevel</a>(<a class="code" href="openctm_8h.html#c5ea1beb64d415c241f2abf35eeb6c48" title="Unsigned integer (32 bits wide).">CTMuint</a> aLevel)
 <a name="l00276"></a>00276     {
-<a name="l00277"></a>00277       <a class="code" href="openctm_8h.html#f4191357f51161a16ff886d18ec848d8" title="Set the vertex coordinate precision (only used by the MG2 compression method).">ctmVertexPrecision</a>(mContext, aPrecision);
+<a name="l00277"></a>00277       <a class="code" href="openctm_8h.html#a2902c49b904a7557fdd012e303c720e" title="Set which LZMA compression level to use for the given OpenCTM context.">ctmCompressionLevel</a>(mContext, aLevel);
 <a name="l00278"></a>00278       CheckError();
 <a name="l00279"></a>00279     }
 <a name="l00280"></a>00280 
-<a name="l00282"></a><a class="code" href="classCTMexporter.html#f4ca0e12d0e6203633abb5ae514cc113">00282</a>     <span class="keywordtype">void</span> <a class="code" href="classCTMexporter.html#f4ca0e12d0e6203633abb5ae514cc113" title="Wrapper for ctmVertexPrecisionRel().">VertexPrecisionRel</a>(<a class="code" href="openctm_8h.html#f8b7eeaefac4d6ad39d11c3f7be8afa2" title="Single precision floating point type (IEEE 754 32 bits wide).">CTMfloat</a> aRelPrecision)
+<a name="l00282"></a><a class="code" href="classCTMexporter.html#137df10c84b6feb8b3c54360f077220a">00282</a>     <span class="keywordtype">void</span> <a class="code" href="classCTMexporter.html#137df10c84b6feb8b3c54360f077220a" title="Wrapper for ctmVertexPrecision().">VertexPrecision</a>(<a class="code" href="openctm_8h.html#f8b7eeaefac4d6ad39d11c3f7be8afa2" title="Single precision floating point type (IEEE 754 32 bits wide).">CTMfloat</a> aPrecision)
 <a name="l00283"></a>00283     {
-<a name="l00284"></a>00284       <a class="code" href="openctm_8h.html#de23eb25fa9d5cd1d932bc1203476f27" title="Set the vertex coordinate precision, relative to the mesh dimensions (only used by...">ctmVertexPrecisionRel</a>(mContext, aRelPrecision);
+<a name="l00284"></a>00284       <a class="code" href="openctm_8h.html#f4191357f51161a16ff886d18ec848d8" title="Set the vertex coordinate precision (only used by the MG2 compression method).">ctmVertexPrecision</a>(mContext, aPrecision);
 <a name="l00285"></a>00285       CheckError();
 <a name="l00286"></a>00286     }
 <a name="l00287"></a>00287 
-<a name="l00289"></a><a class="code" href="classCTMexporter.html#5e91deaa92b529a2a1c8bc87d46952bb">00289</a>     <span class="keywordtype">void</span> <a class="code" href="classCTMexporter.html#5e91deaa92b529a2a1c8bc87d46952bb" title="Wrapper for ctmNormalPrecision().">NormalPrecision</a>(<a class="code" href="openctm_8h.html#f8b7eeaefac4d6ad39d11c3f7be8afa2" title="Single precision floating point type (IEEE 754 32 bits wide).">CTMfloat</a> aPrecision)
+<a name="l00289"></a><a class="code" href="classCTMexporter.html#f4ca0e12d0e6203633abb5ae514cc113">00289</a>     <span class="keywordtype">void</span> <a class="code" href="classCTMexporter.html#f4ca0e12d0e6203633abb5ae514cc113" title="Wrapper for ctmVertexPrecisionRel().">VertexPrecisionRel</a>(<a class="code" href="openctm_8h.html#f8b7eeaefac4d6ad39d11c3f7be8afa2" title="Single precision floating point type (IEEE 754 32 bits wide).">CTMfloat</a> aRelPrecision)
 <a name="l00290"></a>00290     {
-<a name="l00291"></a>00291       <a class="code" href="openctm_8h.html#07d8b47a0e642d0d8c77cf18e8d354a5" title="Set the normal precision (only used by the MG2 compression method).">ctmNormalPrecision</a>(mContext, aPrecision);
+<a name="l00291"></a>00291       <a class="code" href="openctm_8h.html#de23eb25fa9d5cd1d932bc1203476f27" title="Set the vertex coordinate precision, relative to the mesh dimensions (only used by...">ctmVertexPrecisionRel</a>(mContext, aRelPrecision);
 <a name="l00292"></a>00292       CheckError();
 <a name="l00293"></a>00293     }
 <a name="l00294"></a>00294 
-<a name="l00296"></a><a class="code" href="classCTMexporter.html#9433db63ff8581f697d60c1136838cc3">00296</a>     <span class="keywordtype">void</span> <a class="code" href="classCTMexporter.html#9433db63ff8581f697d60c1136838cc3" title="Wrapper for ctmTexCoordPrecision().">TexCoordPrecision</a>(<a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce5625" title="OpenCTM specific enumerators.">CTMenum</a> aTexMap, <a class="code" href="openctm_8h.html#f8b7eeaefac4d6ad39d11c3f7be8afa2" title="Single precision floating point type (IEEE 754 32 bits wide).">CTMfloat</a> aPrecision)
+<a name="l00296"></a><a class="code" href="classCTMexporter.html#5e91deaa92b529a2a1c8bc87d46952bb">00296</a>     <span class="keywordtype">void</span> <a class="code" href="classCTMexporter.html#5e91deaa92b529a2a1c8bc87d46952bb" title="Wrapper for ctmNormalPrecision().">NormalPrecision</a>(<a class="code" href="openctm_8h.html#f8b7eeaefac4d6ad39d11c3f7be8afa2" title="Single precision floating point type (IEEE 754 32 bits wide).">CTMfloat</a> aPrecision)
 <a name="l00297"></a>00297     {
-<a name="l00298"></a>00298       <a class="code" href="openctm_8h.html#48ce36d94459eef641e7bf11ce5898fc" title="Set the texture coordinate precision for the specified texture map (only used by...">ctmTexCoordPrecision</a>(mContext, aTexMap, aPrecision);
+<a name="l00298"></a>00298       <a class="code" href="openctm_8h.html#07d8b47a0e642d0d8c77cf18e8d354a5" title="Set the normal precision (only used by the MG2 compression method).">ctmNormalPrecision</a>(mContext, aPrecision);
 <a name="l00299"></a>00299       CheckError();
 <a name="l00300"></a>00300     }
 <a name="l00301"></a>00301 
-<a name="l00303"></a><a class="code" href="classCTMexporter.html#a23b7350d8ce9e0de716528bc550303c">00303</a>     <span class="keywordtype">void</span> <a class="code" href="classCTMexporter.html#a23b7350d8ce9e0de716528bc550303c" title="Wrapper for ctmAttribPrecision().">AttribPrecision</a>(<a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce5625" title="OpenCTM specific enumerators.">CTMenum</a> aAttribMap, <a class="code" href="openctm_8h.html#f8b7eeaefac4d6ad39d11c3f7be8afa2" title="Single precision floating point type (IEEE 754 32 bits wide).">CTMfloat</a> aPrecision)
+<a name="l00303"></a><a class="code" href="classCTMexporter.html#1de5b12af537d79ea1d5cf7a0fdd6c9c">00303</a>     <span class="keywordtype">void</span> <a class="code" href="classCTMexporter.html#1de5b12af537d79ea1d5cf7a0fdd6c9c" title="Wrapper for ctmUVCoordPrecision().">UVCoordPrecision</a>(<a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce5625" title="OpenCTM specific enumerators.">CTMenum</a> aUVMap, <a class="code" href="openctm_8h.html#f8b7eeaefac4d6ad39d11c3f7be8afa2" title="Single precision floating point type (IEEE 754 32 bits wide).">CTMfloat</a> aPrecision)
 <a name="l00304"></a>00304     {
-<a name="l00305"></a>00305       <a class="code" href="openctm_8h.html#8af7af38bd9340838b43805b81698777" title="Set the attribute value precision for the specified attribute map (only used by the...">ctmAttribPrecision</a>(mContext, aAttribMap, aPrecision);
+<a name="l00305"></a>00305       <a class="code" href="openctm_8h.html#c1a75abbf04281acaff4f6f1f9516039" title="Set the coordinate precision for the specified UV map (only used by the MG2 compression...">ctmUVCoordPrecision</a>(mContext, aUVMap, aPrecision);
 <a name="l00306"></a>00306       CheckError();
 <a name="l00307"></a>00307     }
 <a name="l00308"></a>00308 
-<a name="l00310"></a><a class="code" href="classCTMexporter.html#d9f296aacd93756f482634dba96c9d63">00310</a>     <span class="keywordtype">void</span> <a class="code" href="classCTMexporter.html#d9f296aacd93756f482634dba96c9d63" title="Wrapper for ctmFileComment().">FileComment</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> * aFileComment)
+<a name="l00310"></a><a class="code" href="classCTMexporter.html#a23b7350d8ce9e0de716528bc550303c">00310</a>     <span class="keywordtype">void</span> <a class="code" href="classCTMexporter.html#a23b7350d8ce9e0de716528bc550303c" title="Wrapper for ctmAttribPrecision().">AttribPrecision</a>(<a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce5625" title="OpenCTM specific enumerators.">CTMenum</a> aAttribMap, <a class="code" href="openctm_8h.html#f8b7eeaefac4d6ad39d11c3f7be8afa2" title="Single precision floating point type (IEEE 754 32 bits wide).">CTMfloat</a> aPrecision)
 <a name="l00311"></a>00311     {
-<a name="l00312"></a>00312       <a class="code" href="openctm_8h.html#2225924b06488421ee6b9a8505782a25" title="Set the file comment for the given OpenCTM context.">ctmFileComment</a>(mContext, aFileComment);
+<a name="l00312"></a>00312       <a class="code" href="openctm_8h.html#8af7af38bd9340838b43805b81698777" title="Set the attribute value precision for the specified attribute map (only used by the...">ctmAttribPrecision</a>(mContext, aAttribMap, aPrecision);
 <a name="l00313"></a>00313       CheckError();
 <a name="l00314"></a>00314     }
 <a name="l00315"></a>00315 
-<a name="l00317"></a><a class="code" href="classCTMexporter.html#e93ad35333b949ca371253e43d6936ab">00317</a>     <span class="keywordtype">void</span> <a class="code" href="classCTMexporter.html#e93ad35333b949ca371253e43d6936ab" title="Wrapper for ctmDefineMesh().">DefineMesh</a>(<span class="keyword">const</span> <a class="code" href="openctm_8h.html#f8b7eeaefac4d6ad39d11c3f7be8afa2" title="Single precision floating point type (IEEE 754 32 bits wide).">CTMfloat</a> * aVertices, <a class="code" href="openctm_8h.html#c5ea1beb64d415c241f2abf35eeb6c48" title="Unsigned integer (32 bits wide).">CTMuint</a> aVertexCount, 
-<a name="l00318"></a>00318       <span class="keyword">const</span> <a class="code" href="openctm_8h.html#c5ea1beb64d415c241f2abf35eeb6c48" title="Unsigned integer (32 bits wide).">CTMuint</a> * aIndices, <a class="code" href="openctm_8h.html#c5ea1beb64d415c241f2abf35eeb6c48" title="Unsigned integer (32 bits wide).">CTMuint</a> aTriangleCount,
-<a name="l00319"></a>00319       <span class="keyword">const</span> <a class="code" href="openctm_8h.html#f8b7eeaefac4d6ad39d11c3f7be8afa2" title="Single precision floating point type (IEEE 754 32 bits wide).">CTMfloat</a> * aNormals)
-<a name="l00320"></a>00320     {
-<a name="l00321"></a>00321       <a class="code" href="openctm_8h.html#1cb648e89121ae67f5a8b9e5a8f41c4d" title="Define a triangle mesh.">ctmDefineMesh</a>(mContext, aVertices, aVertexCount, aIndices, aTriangleCount,
-<a name="l00322"></a>00322                     aNormals);
-<a name="l00323"></a>00323       CheckError();
-<a name="l00324"></a>00324     }
-<a name="l00325"></a>00325 
-<a name="l00327"></a><a class="code" href="classCTMexporter.html#20fecde9e044c2854538fd67f96e870e">00327</a>     <a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce5625" title="OpenCTM specific enumerators.">CTMenum</a> <a class="code" href="classCTMexporter.html#20fecde9e044c2854538fd67f96e870e" title="Wrapper for ctmAddTexMap().">AddTexMap</a>(<span class="keyword">const</span> <a class="code" href="openctm_8h.html#f8b7eeaefac4d6ad39d11c3f7be8afa2" title="Single precision floating point type (IEEE 754 32 bits wide).">CTMfloat</a> * aTexCoords, <span class="keyword">const</span> <span class="keywordtype">char</span> * aName,
-<a name="l00328"></a>00328       <span class="keyword">const</span> <span class="keywordtype">char</span> * aFileName)
-<a name="l00329"></a>00329     {
-<a name="l00330"></a>00330       <a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce5625" title="OpenCTM specific enumerators.">CTMenum</a> res = <a class="code" href="openctm_8h.html#cea1fa2e9e45da70032a0b994acfef35" title="Define a texture map.">ctmAddTexMap</a>(mContext, aTexCoords, aName, aFileName);
-<a name="l00331"></a>00331       CheckError();
-<a name="l00332"></a>00332       <span class="keywordflow">return</span> res;
-<a name="l00333"></a>00333     }
-<a name="l00334"></a>00334 
-<a name="l00336"></a><a class="code" href="classCTMexporter.html#c6ae926c8a087af172258ee22ef38331">00336</a>     <a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce5625" title="OpenCTM specific enumerators.">CTMenum</a> <a class="code" href="classCTMexporter.html#c6ae926c8a087af172258ee22ef38331" title="Wrapper for ctmAddAttribMap().">AddAttribMap</a>(<span class="keyword">const</span> <a class="code" href="openctm_8h.html#f8b7eeaefac4d6ad39d11c3f7be8afa2" title="Single precision floating point type (IEEE 754 32 bits wide).">CTMfloat</a> * aAttribValues, <span class="keyword">const</span> <span class="keywordtype">char</span> * aName)
-<a name="l00337"></a>00337     {
-<a name="l00338"></a>00338       <a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce5625" title="OpenCTM specific enumerators.">CTMenum</a> res = <a class="code" href="openctm_8h.html#920a8fed6bef834db0b241fc5c9bba03" title="Define a custom vertex attribute map.">ctmAddAttribMap</a>(mContext, aAttribValues, aName);
-<a name="l00339"></a>00339       CheckError();
-<a name="l00340"></a>00340       <span class="keywordflow">return</span> res;
-<a name="l00341"></a>00341     }
-<a name="l00342"></a>00342 
-<a name="l00344"></a><a class="code" href="classCTMexporter.html#3fdf6505e0aaa7345218cebf1278addf">00344</a>     <span class="keywordtype">void</span> <a class="code" href="classCTMexporter.html#3fdf6505e0aaa7345218cebf1278addf" title="Wrapper for ctmSave().">Save</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> * aFileName)
-<a name="l00345"></a>00345     {
-<a name="l00346"></a>00346       <a class="code" href="openctm_8h.html#cde994008b0b3321bad9f3bbfacb12db" title="Save an OpenCTM format file.">ctmSave</a>(mContext, aFileName);
-<a name="l00347"></a>00347       CheckError();
+<a name="l00317"></a><a class="code" href="classCTMexporter.html#d9f296aacd93756f482634dba96c9d63">00317</a>     <span class="keywordtype">void</span> <a class="code" href="classCTMexporter.html#d9f296aacd93756f482634dba96c9d63" title="Wrapper for ctmFileComment().">FileComment</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> * aFileComment)
+<a name="l00318"></a>00318     {
+<a name="l00319"></a>00319       <a class="code" href="openctm_8h.html#2225924b06488421ee6b9a8505782a25" title="Set the file comment for the given OpenCTM context.">ctmFileComment</a>(mContext, aFileComment);
+<a name="l00320"></a>00320       CheckError();
+<a name="l00321"></a>00321     }
+<a name="l00322"></a>00322 
+<a name="l00324"></a><a class="code" href="classCTMexporter.html#e93ad35333b949ca371253e43d6936ab">00324</a>     <span class="keywordtype">void</span> <a class="code" href="classCTMexporter.html#e93ad35333b949ca371253e43d6936ab" title="Wrapper for ctmDefineMesh().">DefineMesh</a>(<span class="keyword">const</span> <a class="code" href="openctm_8h.html#f8b7eeaefac4d6ad39d11c3f7be8afa2" title="Single precision floating point type (IEEE 754 32 bits wide).">CTMfloat</a> * aVertices, <a class="code" href="openctm_8h.html#c5ea1beb64d415c241f2abf35eeb6c48" title="Unsigned integer (32 bits wide).">CTMuint</a> aVertexCount, 
+<a name="l00325"></a>00325       <span class="keyword">const</span> <a class="code" href="openctm_8h.html#c5ea1beb64d415c241f2abf35eeb6c48" title="Unsigned integer (32 bits wide).">CTMuint</a> * aIndices, <a class="code" href="openctm_8h.html#c5ea1beb64d415c241f2abf35eeb6c48" title="Unsigned integer (32 bits wide).">CTMuint</a> aTriangleCount,
+<a name="l00326"></a>00326       <span class="keyword">const</span> <a class="code" href="openctm_8h.html#f8b7eeaefac4d6ad39d11c3f7be8afa2" title="Single precision floating point type (IEEE 754 32 bits wide).">CTMfloat</a> * aNormals)
+<a name="l00327"></a>00327     {
+<a name="l00328"></a>00328       <a class="code" href="openctm_8h.html#1cb648e89121ae67f5a8b9e5a8f41c4d" title="Define a triangle mesh.">ctmDefineMesh</a>(mContext, aVertices, aVertexCount, aIndices, aTriangleCount,
+<a name="l00329"></a>00329                     aNormals);
+<a name="l00330"></a>00330       CheckError();
+<a name="l00331"></a>00331     }
+<a name="l00332"></a>00332 
+<a name="l00334"></a><a class="code" href="classCTMexporter.html#789c681d97c0bbf584156f529d4216fe">00334</a>     <a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce5625" title="OpenCTM specific enumerators.">CTMenum</a> <a class="code" href="classCTMexporter.html#789c681d97c0bbf584156f529d4216fe" title="Wrapper for ctmAddUVMap().">AddUVMap</a>(<span class="keyword">const</span> <a class="code" href="openctm_8h.html#f8b7eeaefac4d6ad39d11c3f7be8afa2" title="Single precision floating point type (IEEE 754 32 bits wide).">CTMfloat</a> * aUVCoords, <span class="keyword">const</span> <span class="keywordtype">char</span> * aName,
+<a name="l00335"></a>00335       <span class="keyword">const</span> <span class="keywordtype">char</span> * aFileName)
+<a name="l00336"></a>00336     {
+<a name="l00337"></a>00337       <a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce5625" title="OpenCTM specific enumerators.">CTMenum</a> res = <a class="code" href="openctm_8h.html#44345560299ac49dfd502d0470f05e0f" title="Define a UV map.">ctmAddUVMap</a>(mContext, aUVCoords, aName, aFileName);
+<a name="l00338"></a>00338       CheckError();
+<a name="l00339"></a>00339       <span class="keywordflow">return</span> res;
+<a name="l00340"></a>00340     }
+<a name="l00341"></a>00341 
+<a name="l00343"></a><a class="code" href="classCTMexporter.html#c6ae926c8a087af172258ee22ef38331">00343</a>     <a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce5625" title="OpenCTM specific enumerators.">CTMenum</a> <a class="code" href="classCTMexporter.html#c6ae926c8a087af172258ee22ef38331" title="Wrapper for ctmAddAttribMap().">AddAttribMap</a>(<span class="keyword">const</span> <a class="code" href="openctm_8h.html#f8b7eeaefac4d6ad39d11c3f7be8afa2" title="Single precision floating point type (IEEE 754 32 bits wide).">CTMfloat</a> * aAttribValues, <span class="keyword">const</span> <span class="keywordtype">char</span> * aName)
+<a name="l00344"></a>00344     {
+<a name="l00345"></a>00345       <a class="code" href="openctm_8h.html#0f5efe622ac5146c4505d49860ce5625" title="OpenCTM specific enumerators.">CTMenum</a> res = <a class="code" href="openctm_8h.html#920a8fed6bef834db0b241fc5c9bba03" title="Define a custom vertex attribute map.">ctmAddAttribMap</a>(mContext, aAttribValues, aName);
+<a name="l00346"></a>00346       CheckError();
+<a name="l00347"></a>00347       <span class="keywordflow">return</span> res;
 <a name="l00348"></a>00348     }
 <a name="l00349"></a>00349 
-<a name="l00351"></a><a class="code" href="classCTMexporter.html#4dd0f34efdfe192b0627b1bb52a36910">00351</a>     <span class="keywordtype">void</span> <a class="code" href="classCTMexporter.html#4dd0f34efdfe192b0627b1bb52a36910" title="Wrapper for ctmSaveCustom().">SaveCustom</a>(<a class="code" href="openctm_8h.html#2428bc1bf2cf2e1af05d132dca892f5b" title="Stream write() function pointer.">CTMwritefn</a> aWriteFn, <span class="keywordtype">void</span> * aUserData)
+<a name="l00351"></a><a class="code" href="classCTMexporter.html#3fdf6505e0aaa7345218cebf1278addf">00351</a>     <span class="keywordtype">void</span> <a class="code" href="classCTMexporter.html#3fdf6505e0aaa7345218cebf1278addf" title="Wrapper for ctmSave().">Save</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> * aFileName)
 <a name="l00352"></a>00352     {
-<a name="l00353"></a>00353       <a class="code" href="openctm_8h.html#7e62ca5548a34ed0e126fd4f7b77ef3f" title="Save an OpenCTM format file using a custom stream write function.">ctmSaveCustom</a>(mContext, aWriteFn, aUserData);
+<a name="l00353"></a>00353       <a class="code" href="openctm_8h.html#cde994008b0b3321bad9f3bbfacb12db" title="Save an OpenCTM format file.">ctmSave</a>(mContext, aFileName);
 <a name="l00354"></a>00354       CheckError();
 <a name="l00355"></a>00355     }
 <a name="l00356"></a>00356 
-<a name="l00357"></a>00357     <span class="comment">// You can not copy nor assign from one CTMexporter object to another, since</span>
-<a name="l00358"></a>00358     <span class="comment">// the object contains hidden state. By declaring these dummy prototypes</span>
-<a name="l00359"></a>00359     <span class="comment">// without an implementation, you will at least get linker errors if you try</span>
-<a name="l00360"></a>00360     <span class="comment">// to copy or assign a CTMexporter object.</span>
-<a name="l00361"></a>00361     <a class="code" href="classCTMexporter.html#ad8599a96aa930533f6d2a4b71526165" title="Constructor.">CTMexporter</a>(<span class="keyword">const</span> <a class="code" href="classCTMexporter.html" title="OpenCTM exporter class.">CTMexporter</a>&amp; v);
-<a name="l00362"></a>00362     <a class="code" href="classCTMexporter.html" title="OpenCTM exporter class.">CTMexporter</a>&amp; <a class="code" href="classCTMexporter.html#e686aa88aa041e53fdbcbe465b7dbf70">operator=</a>(<span class="keyword">const</span> <a class="code" href="classCTMexporter.html" title="OpenCTM exporter class.">CTMexporter</a>&amp; v);
-<a name="l00363"></a>00363 };
-<a name="l00364"></a>00364 
-<a name="l00365"></a>00365 <span class="preprocessor">#endif // __OPENCTMPP_H_</span>
+<a name="l00358"></a><a class="code" href="classCTMexporter.html#4dd0f34efdfe192b0627b1bb52a36910">00358</a>     <span class="keywordtype">void</span> <a class="code" href="classCTMexporter.html#4dd0f34efdfe192b0627b1bb52a36910" title="Wrapper for ctmSaveCustom().">SaveCustom</a>(<a class="code" href="openctm_8h.html#2428bc1bf2cf2e1af05d132dca892f5b" title="Stream write() function pointer.">CTMwritefn</a> aWriteFn, <span class="keywordtype">void</span> * aUserData)
+<a name="l00359"></a>00359     {
+<a name="l00360"></a>00360       <a class="code" href="openctm_8h.html#7e62ca5548a34ed0e126fd4f7b77ef3f" title="Save an OpenCTM format file using a custom stream write function.">ctmSaveCustom</a>(mContext, aWriteFn, aUserData);
+<a name="l00361"></a>00361       CheckError();
+<a name="l00362"></a>00362     }
+<a name="l00363"></a>00363 
+<a name="l00364"></a>00364     <span class="comment">// You can not copy nor assign from one CTMexporter object to another, since</span>
+<a name="l00365"></a>00365     <span class="comment">// the object contains hidden state. By declaring these dummy prototypes</span>
+<a name="l00366"></a>00366     <span class="comment">// without an implementation, you will at least get linker errors if you try</span>
+<a name="l00367"></a>00367     <span class="comment">// to copy or assign a CTMexporter object.</span>
+<a name="l00368"></a>00368     <a class="code" href="classCTMexporter.html#ad8599a96aa930533f6d2a4b71526165" title="Constructor.">CTMexporter</a>(<span class="keyword">const</span> <a class="code" href="classCTMexporter.html" title="OpenCTM exporter class.">CTMexporter</a>&amp; v);
+<a name="l00369"></a>00369     <a class="code" href="classCTMexporter.html" title="OpenCTM exporter class.">CTMexporter</a>&amp; <a class="code" href="classCTMexporter.html#e686aa88aa041e53fdbcbe465b7dbf70">operator=</a>(<span class="keyword">const</span> <a class="code" href="classCTMexporter.html" title="OpenCTM exporter class.">CTMexporter</a>&amp; v);
+<a name="l00370"></a>00370 };
+<a name="l00371"></a>00371 
+<a name="l00372"></a>00372 <span class="preprocessor">#endif // __OPENCTMPP_H_</span>
 </pre></div></div>
 <div style="padding: 1em 1em 0.5em 1em; margin: 2em 0 0 0; border-top: 1px solid #84b0c7; color: #808080; text-align: center;">
   <p>Copyright &copy; 2009 Marcus Geelnard &mdash;

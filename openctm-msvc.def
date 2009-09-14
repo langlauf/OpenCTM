@@ -1,8 +1,9 @@
 LIBRARY openctm.dll
 EXPORTS
     ctmAddAttribMap
-    ctmAddTexMap
+    ctmAddUVMap
     ctmAttribPrecision
+    ctmCompressionLevel
     ctmCompressionMethod
     ctmDefineMesh
     ctmFileComment
@@ -15,10 +16,10 @@ EXPORTS
     ctmGetInteger
     ctmGetIntegerArray
     ctmGetNamedAttribMap
-    ctmGetNamedTexMap
+    ctmGetNamedUVMap
     ctmGetString
-    ctmGetTexMapFloat
-    ctmGetTexMapString
+    ctmGetUVMapFloat
+    ctmGetUVMapString
     ctmErrorString
     ctmLoad
     ctmLoadCustom
@@ -26,6 +27,6 @@ EXPORTS
     ctmNormalPrecision
     ctmSave
     ctmSaveCustom
-    ctmTexCoordPrecision
+    ctmUVCoordPrecision
     ctmVertexPrecision
     ctmVertexPrecisionRel
