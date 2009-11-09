@@ -164,8 +164,8 @@ typedef unsigned int uint32_t;
 #endif
 
 
-/// OpenCTM API version (0.8).
-#define CTM_API_VERSION 0x00000008
+/// OpenCTM API version (1.0).
+#define CTM_API_VERSION 0x00000100
 
 /// Boolean TRUE.
 #define CTM_TRUE 1
@@ -330,7 +330,7 @@ CTMEXPORT CTMfloat CTMCALL ctmGetFloat(CTMcontext aContext, CTMenum aProperty);
 ///         if \c aProperty does not indicate an integer array, the function
 ///         returns NULL.
 /// @note The array is only valid as long as the OpenCTM context is valid, or
-///       until the corresponding array changes within the OpenCTM contxt
+///       until the corresponding array changes within the OpenCTM context.
 ///       Trying to access an invalid array will result in undefined
 ///       behaviour. Therefor it is recommended that the array is copied to
 ///       a new variable if it is to be used other than directly after the call
@@ -347,7 +347,7 @@ CTMEXPORT const CTMuint * CTMCALL ctmGetIntegerArray(CTMcontext aContext,
 ///         if \c aProperty does not indicate a float array, the function
 ///         returns NULL.
 /// @note The array is only valid as long as the OpenCTM context is valid, or
-///       until the corresponding array changes within the OpenCTM contxt
+///       until the corresponding array changes within the OpenCTM context.
 ///       Trying to access an invalid array will result in undefined
 ///       behaviour. Therefor it is recommended that the array is copied to
 ///       a new variable if it is to be used other than directly after the call
@@ -439,7 +439,7 @@ CTMEXPORT CTMfloat CTMCALL ctmGetAttribMapFloat(CTMcontext aContext,
 /// @return A string value, representing the OpenCTM context property given
 ///         by \c aProperty.
 /// @note The string is only valid as long as the OpenCTM context is valid, or
-///       until the corresponding string changes within the OpenCTM contxt
+///       until the corresponding string changes within the OpenCTM context
 ///       (e.g. calling ctmFileComment() invalidates the CTM_FILE_COMMENT
 ///       string). Trying to access an invalid string will result in undefined
 ///       behaviour. Therefor it is recommended that the string is copied to
@@ -556,7 +556,7 @@ CTMEXPORT void CTMCALL ctmFileComment(CTMcontext aContext,
 /// @param[in] aTriangleCount The number of triangles in \c aIndices (there
 ///            must be exactly 3 x \c aTriangleCount indices in \c aIndices).
 /// @param[in] aNormals An array of per-vertex normals (or NULL if there are
-///            no normals). Each nromal is made up by three consecutive floats,
+///            no normals). Each normal is made up by three consecutive floats,
 ///            and there must be \c aVertexCount normals.
 /// @see ctmAddUVMap(), ctmAddAttribMap(), ctmSave(), ctmSaveCustom().
 CTMEXPORT void CTMCALL ctmDefineMesh(CTMcontext aContext,
