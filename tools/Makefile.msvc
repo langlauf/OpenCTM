@@ -25,7 +25,7 @@
 #     distribution.
 ###############################################################################
 
-OPENCTMDIR = ..
+OPENCTMDIR = ..\lib
 GLEWDIR = glew
 JPEGDIR = jpeg
 RPLYDIR = rply
@@ -35,36 +35,43 @@ CPP = cl
 CPPFLAGS = /nologo /c /Ox /W3 /EHsc /I$(OPENCTMDIR) /I$(RPLYDIR) /I$(JPEGDIR) /I$(TINYXMLDIR) /I$(GLEWDIR) /DGLEW_STATIC /D_CRT_SECURE_NO_WARNINGS
 RC = rc
 
+MESHOBJS = mesh.obj meshio.obj ctm.obj ply.obj rply.obj stl.obj 3ds.obj dae.obj obj.obj
+
 all: ctmconv.exe ctmviewer.exe ctmbench.exe
 
 clean:
-	del /Q ctmconv.exe ctmviewer.exe ctmbench.exe ctmconv.obj ctmviewer.obj ctmbench.obj systimer.obj convoptions.obj ctm.obj ply.obj stl.obj 3ds.obj mesh.obj rply.obj glew.obj bin2c.exe phong_frag.h phong_vert.h ctmconv.res ctmviewer.res
+	del /Q ctmconv.exe ctmviewer.exe ctmbench.exe ctmconv.obj ctmviewer.obj ctmbench.obj systimer.obj convoptions.obj $(MESHOBJS) glew.obj bin2c.exe phong_frag.h phong_vert.h ctmconv.res ctmviewer.res
 	cd $(JPEGDIR) && $(MAKE) /fmakefile.vc clean
 	cd $(TINYXMLDIR) && $(MAKE) /fMakefile.msvc clean
 
-ctmconv.exe: ctmconv.obj systimer.obj convoptions.obj ctm.obj ply.obj stl.obj 3ds.obj dae.obj mesh.obj rply.obj ctmconv.res $(TINYXMLDIR)\tinyxml.lib  $(OPENCTMDIR)\openctm.lib
-	$(CPP) /nologo /Fe$@ ctmconv.obj systimer.obj convoptions.obj ctm.obj ply.obj stl.obj 3ds.obj dae.obj mesh.obj rply.obj ctmconv.res /link /LIBPATH:$(OPENCTMDIR) /LIBPATH:$(TINYXMLDIR) openctm.lib tinyxml.lib
+openctm.dll: $(OPENCTMDIR)\openctm.dll
+	copy $(OPENCTMDIR)\openctm.dll openctm.dll
 
-ctmviewer.exe: ctmviewer.obj systimer.obj convoptions.obj ctm.obj ply.obj stl.obj 3ds.obj dae.obj mesh.obj rply.obj glew.obj ctmviewer.res $(JPEGDIR)\libjpeg.lib $(TINYXMLDIR)\tinyxml.lib $(OPENCTMDIR)\openctm.lib
-	$(CPP) /nologo /Fe$@ ctmviewer.obj systimer.obj convoptions.obj ctm.obj ply.obj stl.obj 3ds.obj dae.obj mesh.obj rply.obj glew.obj ctmviewer.res /link /subsystem:windows /entry:mainCRTStartup /LIBPATH:$(OPENCTMDIR) /LIBPATH:$(TINYXMLDIR) /LIBPATH:$(JPEGDIR) openctm.lib tinyxml.lib glut.lib libjpeg.lib opengl32.lib glu32.lib
+ctmconv.exe: ctmconv.obj systimer.obj convoptions.obj $(MESHOBJS) ctmconv.res $(TINYXMLDIR)\tinyxml.lib openctm.dll
+	$(CPP) /nologo /Fe$@ ctmconv.obj systimer.obj convoptions.obj $(MESHOBJS) ctmconv.res /link /LIBPATH:$(OPENCTMDIR) /LIBPATH:$(TINYXMLDIR) openctm.lib tinyxml.lib
 
-ctmbench.exe: ctmbench.obj systimer.obj $(OPENCTMDIR)\openctm.lib
+ctmviewer.exe: ctmviewer.obj systimer.obj convoptions.obj $(MESHOBJS) glew.obj ctmviewer.res $(JPEGDIR)\libjpeg.lib $(TINYXMLDIR)\tinyxml.lib openctm.dll
+	$(CPP) /nologo /Fe$@ ctmviewer.obj systimer.obj convoptions.obj $(MESHOBJS) glew.obj ctmviewer.res /link /subsystem:windows /entry:mainCRTStartup /LIBPATH:$(OPENCTMDIR) /LIBPATH:$(TINYXMLDIR) /LIBPATH:$(JPEGDIR) openctm.lib tinyxml.lib glut.lib libjpeg.lib opengl32.lib glu32.lib
+
+ctmbench.exe: ctmbench.obj systimer.obj openctm.dll
 	$(CPP) /nologo /Fe$@ ctmbench.obj systimer.obj /link /LIBPATH:$(OPENCTMDIR) openctm.lib
 
 .cpp.obj:
 	$(CPP) $(CPPFLAGS) /Fo$@ $<
 
-ctmconv.obj: ctmconv.cpp systimer.h convoptions.h ctm.h ply.h stl.h 3ds.h mesh.h
-ctmviewer.obj: ctmviewer.cpp systimer.h ctm.h ply.h stl.h 3ds.h mesh.h phong_vert.h phong_frag.h $(JPEGDIR)\libjpeg.lib
+ctmconv.obj: ctmconv.cpp systimer.h convoptions.h mesh.h meshio.h
+ctmviewer.obj: ctmviewer.cpp systimer.h mesh.h meshio.h phong_vert.h phong_frag.h $(JPEGDIR)\libjpeg.lib
 ctmbench.obj: ctmbench.cpp systimer.h
 systimer.obj: systimer.cpp systimer.h
 convoptions.obj: convoptions.cpp convoptions.h
 mesh.obj: mesh.cpp mesh.h convoptions.h
+meshio.obj: meshio.cpp convoptions.h mesh.h ctm.h ply.h stl.h 3ds.h dae.h obj.h
 ctm.obj: ctm.cpp ctm.h mesh.h convoptions.h
 ply.obj: ply.cpp ply.h mesh.h
 stl.obj: stl.cpp stl.h mesh.h
 3ds.obj: 3ds.cpp 3ds.h mesh.h
 dae.obj: dae.cpp dae.h mesh.h
+obj.obj: obj.cpp obj.h mesh.h
 
 phong_vert.h: phong.vert bin2c.exe
 	bin2c.exe phong.vert phongVertSrc > $@

@@ -30,50 +30,25 @@
 #include <stdexcept>
 #include <vector>
 #include <iostream>
+#include <list>
 #include <string>
 #include <cctype>
 #include "systimer.h"
 #include "convoptions.h"
 #include "mesh.h"
-#include "ctm.h"
-#include "ply.h"
-#include "stl.h"
-#include "3ds.h"
-#include "dae.h"
+#include "meshio.h"
 
 using namespace std;
 
 
 //-----------------------------------------------------------------------------
-// UpperCase()
-//-----------------------------------------------------------------------------
-string UpperCase(const string &aString)
-{
-  string result(aString);
-  for(unsigned int i = 0; i < result.size(); ++ i)
-    result[i] = toupper(result[i]);
-  return result;
-}
-
-//-----------------------------------------------------------------------------
-// ExtractFileExt()
-//-----------------------------------------------------------------------------
-string ExtractFileExt(const string &aString)
-{
-  string result = "";
-  size_t extPos = aString.rfind(".");
-  if(extPos != string::npos)
-    result = aString.substr(extPos);
-  return result;
-}
-
-//-----------------------------------------------------------------------------
 // PreProcessMesh()
 //-----------------------------------------------------------------------------
-void PreProcessMesh(Mesh &aMesh, Options &aOptions)
+static void PreProcessMesh(Mesh &aMesh, Options &aOptions)
 {
   // Nothing to do?
-  if((aOptions.mScale == 1.0f) && (aOptions.mUpAxis == uaZ))
+  if((aOptions.mScale == 1.0f) && (aOptions.mUpAxis == uaZ) &&
+     (!aOptions.mFlipTriangles))
     return;
 
   // Create 3x3 transformation matrices for the vertices and the normals
@@ -132,6 +107,18 @@ void PreProcessMesh(Mesh &aMesh, Options &aOptions)
                         nY * aMesh.mNormals[i].y +
                         nZ * aMesh.mNormals[i].z;
 
+  // Flip trianlges?
+  if(aOptions.mFlipTriangles)
+  {
+    CTMuint triCount = aMesh.mIndices.size() / 3;
+    for(CTMuint i = 0; i < triCount; ++ i)
+    {
+      CTMuint tmp = aMesh.mIndices[i * 3];
+      aMesh.mIndices[i * 3] = aMesh.mIndices[i * 3 + 1];
+      aMesh.mIndices[i * 3 + 1] = tmp;
+    }
+  }
+
   double dt = timer.PopDelta();
   cout << 1000.0 * dt << " ms" << endl;
 }
@@ -163,6 +150,7 @@ int main(int argc, char ** argv)
     cout << "  --scale arg     Scale the mesh by a scalar factor." << endl;
     cout << "  --upaxis arg    Set up axis (X, Y, Z, -X, -Y, -Z). If != Z, the mesh will" << endl;
     cout << "                  be flipped." << endl;
+    cout << "  --flip          Flip triangle orientation." << endl;
     cout << endl << " OpenCTM output" << endl;
     cout << "  --method arg    Select compression method (RAW, MG1, MG2)" << endl;
     cout << "  --level arg     Set the compression level (0 - 9)" << endl;
@@ -178,6 +166,15 @@ int main(int argc, char ** argv)
     cout << "  --texfile arg   Set the texture file name reference for the texture" << endl;
     cout << "                  (default is to use the texture file name reference" << endl;
     cout << "                  from the input file, if any)." << endl;
+
+    // Show supported formats
+    cout << endl << "Supported file formats:" << endl << endl;
+    list<string> formatList;
+    SupportedFormats(formatList);
+    for(list<string>::iterator i = formatList.begin(); i != formatList.end(); ++ i)
+      cout << "  " << (*i) << endl;
+    cout << endl;
+
     return 0;
   }
 
@@ -192,20 +189,8 @@ int main(int argc, char ** argv)
 
     // Load input file
     cout << "Loading " << inFile << "... " << flush;
-    string fileExt = UpperCase(ExtractFileExt(inFile));
     timer.Push();
-    if(fileExt == string(".PLY"))
-      Import_PLY(inFile.c_str(), mesh);
-    else if(fileExt == string(".STL"))
-      Import_STL(inFile.c_str(), mesh);
-    else if(fileExt == string(".3DS"))
-      Import_3DS(inFile.c_str(), mesh);
-    else if(fileExt == string(".DAE"))
-      Import_DAE(inFile.c_str(), mesh);
-    else if(fileExt == string(".CTM"))
-      Import_CTM(inFile.c_str(), mesh);
-    else
-      throw runtime_error("Unknown input file extension.");
+    ImportMesh(inFile.c_str(), mesh);
     dt = timer.PopDelta();
     cout << 1000.0 * dt << " ms" << endl;
 
@@ -223,19 +208,7 @@ int main(int argc, char ** argv)
     // Save output file
     cout << "Saving " << outFile << "... " << flush;
     timer.Push();
-    fileExt = UpperCase(ExtractFileExt(outFile));
-    if(fileExt == string(".PLY"))
-      Export_PLY(outFile.c_str(), mesh);
-    else if(fileExt == string(".STL"))
-      Export_STL(outFile.c_str(), mesh);
-    else if(fileExt == string(".3DS"))
-      Export_3DS(outFile.c_str(), mesh);
-    else if(fileExt == string(".DAE"))
-      Export_DAE(outFile.c_str(), mesh);
-    else if(fileExt == string(".CTM"))
-      Export_CTM(outFile.c_str(), mesh, opt);
-    else
-      throw runtime_error("Unknown output file extension.");
+    ExportMesh(outFile.c_str(), mesh, opt);
     dt = timer.PopDelta();
     cout << 1000.0 * dt << " ms" << endl;
   }

@@ -40,11 +40,7 @@
 #endif
 #include <jpeglib.h>
 #include "mesh.h"
-#include "ctm.h"
-#include "ply.h"
-#include "stl.h"
-#include "3ds.h"
-#include "dae.h"
+#include "meshio.h"
 
 using namespace std;
 
@@ -63,33 +59,8 @@ using namespace std;
 #include "phong_frag.h"
 
 
-//-----------------------------------------------------------------------------
-// UpperCase()
-//-----------------------------------------------------------------------------
-string UpperCase(const string &aString)
-{
-  string result(aString);
-  for(unsigned int i = 0; i < result.size(); ++ i)
-    result[i] = toupper(result[i]);
-  return result;
-}
-
-//-----------------------------------------------------------------------------
-// ExtractFileExt()
-//-----------------------------------------------------------------------------
-string ExtractFileExt(const string &aString)
-{
-  string result = "";
-  size_t extPos = aString.rfind(".");
-  if(extPos != string::npos)
-    result = aString.substr(extPos);
-  return result;
-}
-
-
-
 // Global variables (this is a simple program, after all)
-string fileName("");
+string fileName(""), filePath("");
 long fileSize = 0;
 
 int width = 1, height = 1;
@@ -109,6 +80,7 @@ bool useShader = false;
 GLuint shaderProgram = 0;
 GLuint vertShader = 0;
 GLuint fragShader = 0;
+
 
 /// Set up the scene.
 void SetupScene()
@@ -185,8 +157,14 @@ void InitTexture(const char * aFileName)
   // Load texture from a JPEG file
   if(aFileName)
   {
-    FILE * inFile;
-    if((inFile = fopen(aFileName, "rb")) != NULL)
+    FILE * inFile = fopen(aFileName, "rb");
+    if((inFile == NULL) && (filePath.size() > 0))
+    {
+      // Try the same path as the mesh file
+      string name = filePath + string(aFileName);
+      inFile = fopen(name.c_str(), "rb");
+    }
+    if(inFile != NULL)
     {
       cout << "Loading texture (" << aFileName << ")..." << endl;
       struct jpeg_decompress_struct cinfo;
@@ -663,14 +641,33 @@ int main(int argc, char **argv)
   if((argc < 2) || (argc > 3))
   {
     cout << "Usage: ctmviewer file [texturefile]" << endl;
+
+    // Show supported formats
+    cout << endl << "Supported file formats:" << endl << endl;
+    list<string> formatList;
+    SupportedFormats(formatList);
+    for(list<string>::iterator i = formatList.begin(); i != formatList.end(); ++ i)
+      cout << "  " << (*i) << endl;
+    cout << endl;
+
     return 0;
   }
 
   try
   {
-    // Get the file name and size
+    // Get the file name (excluding the path), and the path (excluding the file name)
     fileName = string(argv[1]);
-    ifstream f(fileName.c_str(), ios::in | ios::binary);
+    size_t lastSlash = fileName.rfind("/");
+    if(lastSlash == string::npos)
+      lastSlash = fileName.rfind("\\");
+    if(lastSlash != string::npos)
+    {
+      filePath = fileName.substr(0, lastSlash + 1);
+      fileName = fileName.substr(lastSlash + 1);
+    }
+
+    // Get the file size
+    ifstream f(argv[1], ios::in | ios::binary);
     if(f.fail())
       throw runtime_error("Unable to open the file.");
     f.seekg(0, ios_base::end);
@@ -683,19 +680,7 @@ int main(int argc, char **argv)
     // Load the file
     cout << "Loading " << argv[1] << "..." << flush;
     int t = glutGet(GLUT_ELAPSED_TIME);
-    string fileExt = UpperCase(ExtractFileExt(string(argv[1])));
-    if(fileExt == string(".PLY"))
-      Import_PLY(argv[1], mesh);
-    else if(fileExt == string(".STL"))
-      Import_STL(argv[1], mesh);
-    else if(fileExt == string(".3DS"))
-      Import_3DS(argv[1], mesh);
-    else if(fileExt == string(".DAE"))
-      Import_DAE(argv[1], mesh);
-    else if(fileExt == string(".CTM"))
-      Import_CTM(argv[1], mesh);
-    else
-      throw runtime_error("Unknown input file extension.");
+    ImportMesh(argv[1], mesh);
     t = glutGet(GLUT_ELAPSED_TIME) - t;
     cout << "done (" << t << " ms)" << endl;
 
@@ -715,7 +700,7 @@ int main(int argc, char **argv)
     // Create the glut window
     glutInitWindowSize(640, 480);
     glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH);
-    string windowCaption = string("OpenCTM viewer - ") + string(argv[1]);
+    string windowCaption = string("OpenCTM viewer - ") + fileName;
     glutCreateWindow(windowCaption.c_str());
     glutReshapeFunc(WindowResize);
     glutDisplayFunc(WindowRedraw);

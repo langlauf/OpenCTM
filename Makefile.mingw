@@ -1,7 +1,7 @@
 ###############################################################################
 # Product:     OpenCTM
 # File:        Makefile.mingw
-# Description: Makefile for MinGW32 for Windows.
+# Description: Top level makefile for Windows / MinGW32.
 ###############################################################################
 # Copyright (c) 2009 Marcus Geelnard
 #
@@ -25,71 +25,20 @@
 #     distribution.
 ###############################################################################
 
-LZMADIR = liblzma
-CC = gcc
-CFLAGS = -O3 -W -Wall -c -DOPENCTM_BUILD -I$(LZMADIR) -DLZMA_PREFIX_CTM -std=c99 -pedantic
-CFLAGS_LZMA = -O3 -W -Wall -c -DLZMA_PREFIX_CTM -std=c99 -pedantic
-RM = del /Q
-DOXYGEN = doxygen
-DEPEND = $(CC) -MM
-RC = windres
+.phony: all openctm toolset documentation clean
 
-DYNAMICLIB = openctm.dll
-LINKLIB = libopenctm.a
-
-OBJS = openctm.o \
-       stream.o \
-       compressRAW.o \
-       compressMG1.o \
-       compressMG2.o
-
-LZMA_OBJS = Alloc.o \
-            LzFind.o \
-            LzmaDec.o \
-            LzmaEnc.o \
-            LzmaLib.o
-
-SRCS = openctm.c \
-       stream.c \
-       compressRAW.c \
-       compressMG1.c \
-       compressMG2.c
-
-LZMA_SRCS = $(LZMADIR)/Alloc.c \
-            $(LZMADIR)/LzFind.c \
-            $(LZMADIR)/LzmaDec.c \
-            $(LZMADIR)/LzmaEnc.c \
-            $(LZMADIR)/LzmaLib.c
-
-.phony: all docs tools clean depend
-
-all: $(DYNAMICLIB) tools
+all: openctm toolset documentation
 
 clean:
-	$(RM) $(DYNAMICLIB) $(LINKLIB) $(OBJS) $(LZMA_OBJS) openctm-res.o
+	cd lib && $(MAKE) -f Makefile.mingw clean && cd ..
+	cd tools && $(MAKE) -f Makefile.mingw clean && cd ..
+	cd doc && $(MAKE) -f Makefile.win clean && cd ..
 
-docs:
-	cd doc && $(DOXYGEN) && cd ..
+openctm:
+	cd lib && $(MAKE) -f Makefile.mingw -j2 && cd ..
 
-tools: $(DYNAMICLIB)
-	cd tools && $(MAKE) -f Makefile.mingw && cd ..
+toolset:
+	cd tools && $(MAKE) -f Makefile.mingw -j2 && cd ..
 
-$(DYNAMICLIB): $(OBJS) $(LZMA_OBJS) openctm-mingw1.def openctm-mingw2.def openctm-res.o
-	dllwrap --def openctm-mingw1.def -o $@ $(OBJS) $(LZMA_OBJS) openctm-res.o
-	strip $@
-	dlltool --kill-at --output-lib $(LINKLIB) --def openctm-mingw2.def
-	copy /Y $@ tools
-
-openctm-res.o: openctm.rc
-	$(RC) $< $@
-
-%.o: %.c
-	$(CC) $(CFLAGS) $<
-
-%.o: $(LZMADIR)/%.c
-	$(CC) $(CFLAGS_LZMA) $<
-
-depend:
-	$(DEPEND) $(SRCS) $(LZMA_SRCS) > make.depend
-
--include make.depend
+documentation:
+	cd doc && $(MAKE) -f Makefile.win -j2 && cd ..

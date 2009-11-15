@@ -39,8 +39,9 @@ Options::Options()
   // Set default values
   mScale = 1.0f;
   mUpAxis = uaZ;
+  mFlipTriangles = false;
   mMethod = CTM_METHOD_MG2;
-  mLevel = 5;
+  mLevel = 1;
   mVertexPrecision = 0.0f;
   mVertexPrecisionRel = 0.01f;
   mNormalPrecision = 1.0f / 256.0f;
@@ -101,6 +102,10 @@ void Options::GetFromArgs(int argc, char **argv, int aStartIdx)
         mUpAxis = uaNZ;
       else
         throw runtime_error("Invalid up axis (use X, Y, Z, -X, -Y or -Z).");
+    }
+    else if(cmd == string("--flip"))
+    {
+      mFlipTriangles = true;
     }
     else if((cmd == string("--method")) && (i < (argc - 1)))
     {

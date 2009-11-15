@@ -1,7 +1,7 @@
 ###############################################################################
 # Product:     OpenCTM
 # File:        Makefile.macosx
-# Description: Makefile for Mac OS X.
+# Description: Top level makefile for Mac OS X.
 ###############################################################################
 # Copyright (c) 2009 Marcus Geelnard
 #
@@ -25,64 +25,20 @@
 #     distribution.
 ###############################################################################
 
-LZMADIR = liblzma
-CC = gcc
-CFLAGS = -O3 -W -Wall -c -fvisibility=hidden -DOPENCTM_BUILD -I$(LZMADIR) -DLZMA_PREFIX_CTM -std=c99 -pedantic
-CFLAGS_LZMA = -O3 -W -Wall -c -fvisibility=hidden -DLZMA_PREFIX_CTM -std=c99 -pedantic
-RM = rm -f
-DOXYGEN = doxygen
-DEPEND = $(CPP) -MM
+.phony: all openctm toolset documentation clean
 
-DYNAMICLIB = libopenctm.dylib
-
-OBJS = openctm.o \
-       stream.o \
-       compressRAW.o \
-       compressMG1.o \
-       compressMG2.o
-
-LZMA_OBJS = Alloc.o \
-            LzFind.o \
-            LzmaDec.o \
-            LzmaEnc.o \
-            LzmaLib.o
-
-SRCS = openctm.c \
-       stream.c \
-       compressRAW.c \
-       compressMG1.c \
-       compressMG2.c
-
-LZMA_SRCS = $(LZMADIR)/Alloc.c \
-            $(LZMADIR)/LzFind.c \
-            $(LZMADIR)/LzmaDec.c \
-            $(LZMADIR)/LzmaEnc.c \
-            $(LZMADIR)/LzmaLib.c
-
-.phony: all docs tools clean depend
-
-all: $(DYNAMICLIB) tools
+all: openctm toolset documentation
 
 clean:
-	$(RM) $(DYNAMICLIB) $(OBJS) $(LZMA_OBJS)
+	cd lib && $(MAKE) -f Makefile.macosx clean && cd ..
+	cd tools && $(MAKE) -f Makefile.macosx clean && cd ..
+	cd doc && $(MAKE) -f Makefile.macosx clean && cd ..
 
-docs:
-	cd doc && $(DOXYGEN) && cd ..
+openctm:
+	cd lib && $(MAKE) -f Makefile.macosx -j2 && cd ..
 
-tools: $(DYNAMICLIB)
-	cd tools && $(MAKE) -f Makefile.macosx && cd ..
+toolset:
+	cd tools && $(MAKE) -f Makefile.macosx -j2 && cd ..
 
-$(DYNAMICLIB): $(OBJS) $(LZMA_OBJS)
-	gcc -dynamiclib -o $@ $(OBJS) $(LZMA_OBJS)
-	cp -f $(DYNAMICLIB) tools/
-
-%.o: %.c
-	$(CC) $(CFLAGS) $<
-
-%.o: $(LZMADIR)/%.c
-	$(CC) $(CFLAGS_LZMA) $<
-
-depend:
-	$(DEPEND) $(SRCS) $(LZMA_SRCS) > make.depend
-
--include make.depend
+documentation:
+	cd doc && $(MAKE) -f Makefile.macosx -j2 && cd ..

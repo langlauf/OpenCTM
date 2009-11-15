@@ -1,7 +1,7 @@
 ###############################################################################
 # Product:     OpenCTM
 # File:        Makefile.msvc
-# Description: Makefile for MS Visual Studion 2008 for Windows.
+# Description: Top level makefile for Windows / MS Visual Studio 2008.
 ###############################################################################
 # Copyright (c) 2009 Marcus Geelnard
 #
@@ -25,87 +25,20 @@
 #     distribution.
 ###############################################################################
 
-LZMADIR = liblzma
-CC = cl
-CFLAGS = /nologo /Ox /W3 /c /DOPENCTM_BUILD /I$(LZMADIR) /DLZMA_PREFIX_CTM /D_CRT_SECURE_NO_WARNINGS
-CFLAGS_LZMA = /nologo /Ox /W3 /c /DLZMA_PREFIX_CTM
-RM = del /Q
-DOXYGEN = doxygen
-RC = rc
+.PHONY: all openctm toolset documentation clean
 
-DYNAMICLIB = openctm.dll
-LINKLIB = openctm.lib
-
-OBJS = openctm.obj \
-       stream.obj \
-       compressRAW.obj \
-       compressMG1.obj \
-       compressMG2.obj
-
-LZMA_OBJS = Alloc.obj \
-            LzFind.obj \
-            LzmaDec.obj \
-            LzmaEnc.obj \
-            LzmaLib.obj
-
-SRCS = openctm.c \
-       stream.c \
-       compressRAW.c \
-       compressMG1.c \
-       compressMG2.c
-
-LZMA_SRCS = $(LZMADIR)\Alloc.c \
-            $(LZMADIR)\LzFind.c \
-            $(LZMADIR)\LzmaDec.c \
-            $(LZMADIR)\LzmaEnc.c \
-            $(LZMADIR)\LzmaLib.c
-
-all: $(DYNAMICLIB) tools
-
-.PHONY: clean docs tools
+all: openctm toolset documentation
 
 clean:
-	$(RM) $(DYNAMICLIB) $(LINKLIB) $(OBJS) $(LZMA_OBJS) openctm.res
+	cd lib && $(MAKE) /nologo /f Makefile.msvc clean && cd ..
+	cd tools && $(MAKE) /nologo /f Makefile.msvc clean && cd ..
+	cd doc && $(MAKE) /nologo /f Makefile.win clean && cd ..
 
-docs:
-	cd doc && $(DOXYGEN) && cd ..
+openctm:
+	cd lib && $(MAKE) /nologo /f Makefile.msvc && cd ..
 
-tools: $(DYNAMICLIB)
+toolset:
 	cd tools && $(MAKE) /nologo /f Makefile.msvc && cd ..
 
-$(DYNAMICLIB): $(OBJS) $(LZMA_OBJS) openctm-msvc.def openctm.res
-	link /nologo /out:$@ /dll /implib:$(LINKLIB) /def:openctm-msvc.def $(OBJS) $(LZMA_OBJS) openctm.res
-	copy /Y $@ tools
-
-openctm.res: openctm.rc
-	$(RC) openctm.rc
-
-openctm.obj: openctm.c openctm.h internal.h
-	$(CC) $(CFLAGS) openctm.c
-
-stream.obj: stream.c openctm.h internal.h
-	$(CC) $(CFLAGS) stream.c
-
-compressRAW.obj: compressRAW.c openctm.h internal.h
-	$(CC) $(CFLAGS) compressRAW.c
-
-compressMG1.obj: compressMG1.c openctm.h internal.h
-	$(CC) $(CFLAGS) compressMG1.c
-
-compressMG2.obj: compressMG2.c openctm.h internal.h
-	$(CC) $(CFLAGS) compressMG2.c
-
-Alloc.obj: $(LZMADIR)\Alloc.c $(LZMADIR)\Alloc.h
-	$(CC) $(CFLAGS_LZMA) $(LZMADIR)\Alloc.c
-
-LzFind.obj: $(LZMADIR)\LzFind.c $(LZMADIR)\LzFind.h $(LZMADIR)\Types.h $(LZMADIR)\LzHash.h $(LZMADIR)\NameMangle.h
-	$(CC) $(CFLAGS_LZMA) $(LZMADIR)\LzFind.c
-
-LzmaDec.obj: $(LZMADIR)\LzmaDec.c $(LZMADIR)\LzmaDec.h $(LZMADIR)\Types.h $(LZMADIR)\NameMangle.h
-	$(CC) $(CFLAGS_LZMA) $(LZMADIR)\LzmaDec.c
-
-LzmaEnc.obj: $(LZMADIR)\LzmaEnc.c $(LZMADIR)\LzmaEnc.h $(LZMADIR)\Types.h $(LZMADIR)\LzFind.h $(LZMADIR)\NameMangle.h
-	$(CC) $(CFLAGS_LZMA) $(LZMADIR)\LzmaEnc.c
-
-LzmaLib.obj: $(LZMADIR)\LzmaLib.c $(LZMADIR)\LzmaEnc.h $(LZMADIR)\Types.h $(LZMADIR)\LzmaDec.h $(LZMADIR)\Alloc.h $(LZMADIR)\LzmaLib.h $(LZMADIR)\NameMangle.h
-	$(CC) $(CFLAGS_LZMA) $(LZMADIR)\LzmaLib.c
+documentation:
+	cd doc && $(MAKE) /nologo /f Makefile.win && cd ..
