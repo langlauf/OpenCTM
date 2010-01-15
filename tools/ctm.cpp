@@ -3,7 +3,7 @@
 // File:        ctm.h
 // Description: Implementation of the OpenCTM file format importer/exporter.
 //-----------------------------------------------------------------------------
-// Copyright (c) 2009 Marcus Geelnard
+// Copyright (c) 2009-2010 Marcus Geelnard
 //
 // This software is provided 'as-is', without any express or implied
 // warranty. In no event will the authors be held liable for any damages
@@ -121,14 +121,14 @@ void Export_CTM(const char * aFileName, Mesh * aMesh, Options &aOptions)
 
   // Define mesh
   CTMfloat * normals = 0;
-  if(aMesh->mNormals.size() > 0)
+  if(aMesh->HasNormals() && !aOptions.mNoNormals)
     normals = &aMesh->mNormals[0].x;
   ctm.DefineMesh((CTMfloat *) &aMesh->mVertices[0].x, aMesh->mVertices.size(),
                  (const CTMuint*) &aMesh->mIndices[0], aMesh->mIndices.size() / 3,
                  normals);
 
   // Define texture coordinates
-  if(aMesh->mTexCoords.size() > 0)
+  if(aMesh->HasTexCoords())
   {
     const char * fileName = NULL;
     if(aMesh->mTexFileName.size() > 0)
@@ -138,7 +138,7 @@ void Export_CTM(const char * aFileName, Mesh * aMesh, Options &aOptions)
   }
 
   // Define vertex colors
-  if(aMesh->mColors.size() > 0)
+  if(aMesh->HasColors())
   {
     CTMenum map = ctm.AddAttribMap(&aMesh->mColors[0].x, "Color");
     ctm.AttribPrecision(map, aOptions.mColorPrecision);

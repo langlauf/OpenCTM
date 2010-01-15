@@ -3,7 +3,7 @@
 // File:        ply.h
 // Description: Interface for the PLY file format importer/exporter.
 //-----------------------------------------------------------------------------
-// Copyright (c) 2009 Marcus Geelnard
+// Copyright (c) 2009-2010 Marcus Geelnard
 //
 // This software is provided 'as-is', without any express or implied
 // warranty. In no event will the authors be held liable for any damages
@@ -29,11 +29,12 @@
 #define __PLY_H_
 
 #include "mesh.h"
+#include "convoptions.h"
 
 /// Import a PLY file from a file.
 void Import_PLY(const char * aFileName, Mesh * aMesh);
 
 /// Export a PLY file to a file.
-void Export_PLY(const char * aFileName, Mesh * aMesh);
+void Export_PLY(const char * aFileName, Mesh * aMesh, Options &aOptions);
 
 #endif // __PLY_H_

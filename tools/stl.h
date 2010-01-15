@@ -3,7 +3,7 @@
 // File:        stl.h
 // Description: Interface for the STL file format importer/exporter.
 //-----------------------------------------------------------------------------
-// Copyright (c) 2009 Marcus Geelnard
+// Copyright (c) 2009-2010 Marcus Geelnard
 //
 // This software is provided 'as-is', without any express or implied
 // warranty. In no event will the authors be held liable for any damages
@@ -29,11 +29,12 @@
 #define __STL_H_
 
 #include "mesh.h"
+#include "convoptions.h"
 
 /// Import an STL file from a file.
 void Import_STL(const char * aFileName, Mesh * aMesh);
 
 /// Export an STL file to a file.
-void Export_STL(const char * aFileName, Mesh * aMesh);
+void Export_STL(const char * aFileName, Mesh * aMesh, Options &aOptions);
 
 #endif // __STL_H_

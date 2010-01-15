@@ -29,10 +29,13 @@ Here is an incomplete list of persons that deserve credit:
 
 - Igor Pavlov (LZMA library)
 - Jonas Innala (COLLADA importer, Maya exporter plugin)
+- Ilian Dinev (help with the OpenCTM file format design and the LWO loader)
 - Lee Thomason (TinyXML)
 - Diego Nehab (RPly - for loading PLY files)
 - Lev Povalahev, Marcelo E. Magallon, Milan Ikits (GLEW)
 - Thomas G. Lane, Guido Vollbeding (libjpeg)
+- Jean-loup Gailly, Mark Adler (zlib)
+- Daniel Karling (pnglite)
 
 During the development of OpenCTM, the following software has been used
 extensively:
@@ -51,6 +54,27 @@ Legal notices:
 
 4. CHANGES
 ==========
+
+v1.0.3 - 2010.01.15
+-------------------
+- Added support for PNG format textures (ctmviewer).
+
+- Added support for LightWave LWO files (ctmconv and ctmviewer).
+
+- Added support for Geomview OFF files, e.g. as used by the Princeton Shape
+  Benchmark (ctmconv and ctmviewer).
+
+- Improved the OBJ file loader (ctmviewer and ctmconv).
+
+- Experimental support for VRML 2.0 files - export only (ctmconv and ctmviewer).
+
+- Made it possible to run ctmviewer without command line arguments.
+
+- Improved the normal calculation algorithm (ctmviewer and ctmconv).
+
+- Normals are no longer exported if no normals were present in the input file
+  (ctmviewer).
+
 
 v1.0.2 - 2009.12.13
 -------------------

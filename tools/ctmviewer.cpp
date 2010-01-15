@@ -5,7 +5,7 @@
 //              in an interactive OpenGL window. Files in other supported
 //              formats can also be viewed.
 //-----------------------------------------------------------------------------
-// Copyright (c) 2009 Marcus Geelnard
+// Copyright (c) 2009-2010 Marcus Geelnard
 //
 // This software is provided 'as-is', without any express or implied
 // warranty. In no event will the authors be held liable for any damages
@@ -38,12 +38,13 @@
 #else
   #include <GL/glut.h>
 #endif
-#include <jpeglib.h>
 #include <openctm.h>
 #include "mesh.h"
 #include "meshio.h"
 #include "sysdialog.h"
 #include "systimer.h"
+#include "image.h"
+#include "common.h"
 
 using namespace std;
 
@@ -508,67 +509,64 @@ void GLViewer::InitShader()
 /// Initialize the texture.
 void GLViewer::InitTexture(const char * aFileName)
 {
-  unsigned char * data = 0;
-  int width = 256, height = 256, components = 1;
+  Image image;
 
-  // Load texture from a JPEG file
+  // Load texture from a file
   if(aFileName)
   {
-    FILE * inFile = fopen(aFileName, "rb");
-    if((inFile == NULL) && (mFilePath.size() > 0))
+    // Check if file exists, and determine actual file name (relative or absolute)
+    bool fileExists = false;
+    string name = string(aFileName);
+    FILE * inFile = fopen(name.c_str(), "rb");
+    if(inFile)
+      fileExists = true;
+    else if(mFilePath.size() > 0)
     {
       // Try the same path as the mesh file
-      string name = mFilePath + string(aFileName);
+      name = mFilePath + string(aFileName);
       inFile = fopen(name.c_str(), "rb");
+      if(inFile)
+        fileExists = true;
     }
-    if(inFile != NULL)
+    if(inFile)
+      fclose(inFile);
+
+    if(fileExists)
     {
       cout << "Loading texture (" << aFileName << ")..." << endl;
-      struct jpeg_decompress_struct cinfo;
-      struct jpeg_error_mgr jerr;
-      cinfo.err = jpeg_std_error(&jerr);
-      jpeg_create_decompress(&cinfo);
-      jpeg_stdio_src(&cinfo, inFile);
-      jpeg_read_header(&cinfo, TRUE);
-      jpeg_start_decompress(&cinfo);
-      width = cinfo.output_width;
-      height = cinfo.output_height;
-      components = cinfo.output_components;
-      data = new unsigned char[width * height * components];
-      for(int i = 0; i < height; ++ i)
+      try
       {
-        unsigned char * scanLines[1];
-        scanLines[0] = &data[(height - 1 - i) * width * components];
-        jpeg_read_scanlines(&cinfo, scanLines, 1);
+        image.LoadFromFile(name.c_str());
       }
-      jpeg_finish_decompress(&cinfo);
-      jpeg_destroy_decompress(&cinfo);
+      catch(exception &e)
+      {
+        cout << "Error loading texture: " << e.what() << endl;
+        image.Clear();
+      }
     }
   }
 
   // If no texture was loaded
-  if(!data)
+  if(image.IsEmpty())
   {
     cout << "Loading texture (dummy)..." << endl;
 
     // Create a default, synthetic texture
-    width = height = 256;
-    components = 1;
-    data = new unsigned char[width * height * components];
-    for(int y = 0; y < height; ++ y)
+    image.SetSize(256, 256, 1);
+    for(int y = 0; y < image.mHeight; ++ y)
     {
-      for(int x = 0; x < width; ++ x)
+      for(int x = 0; x < image.mWidth; ++ x)
       {
         if(((x & 0x000f) == 0) || ((y & 0x000f) == 0))
-          data[y * width + x] = 192;
+          image.mData[y * image.mWidth + x] = 192;
         else
-          data[y * width + x] = 255;
+          image.mData[y * image.mWidth + x] = 255;
       }
     }
   }
 
   // Upload the texture to OpenGL
-  if(data)
+  if(!image.IsEmpty())
     glGenTextures(1, &mTexHandle);
   else
     mTexHandle = 0;
@@ -576,9 +574,9 @@ void GLViewer::InitTexture(const char * aFileName)
   {
     // Determine the color format
     GLuint format;
-    if(components == 3)
+    if(image.mComponents == 3)
       format = GL_RGB;
-    else if(components == 4)
+    else if(image.mComponents == 4)
       format = GL_RGBA;
     else
       format = GL_LUMINANCE;
@@ -599,7 +597,7 @@ void GLViewer::InitTexture(const char * aFileName)
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 
-    glTexImage2D(GL_TEXTURE_2D, 0, components, width, height, 0, format, GL_UNSIGNED_BYTE, (GLvoid *) data);
+    glTexImage2D(GL_TEXTURE_2D, 0, image.mComponents, image.mWidth, image.mHeight, 0, format, GL_UNSIGNED_BYTE, (GLvoid *) &image.mData[0]);
   }
 }
 
@@ -611,9 +609,9 @@ void GLViewer::SetupLighting()
   // Set scene lighting properties
   glLightModeli(GL_LIGHT_MODEL_TWO_SIDE, GL_TRUE);
   glLightModeli(GL_LIGHT_MODEL_LOCAL_VIEWER, GL_TRUE);
-  ambient[0] = 0.08;
-  ambient[1] = 0.08;
-  ambient[2] = 0.08;
+  ambient[0] = 0.2;
+  ambient[1] = 0.2;
+  ambient[2] = 0.2;
   ambient[3] = 1.0;
   glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambient);
 
@@ -628,9 +626,9 @@ void GLViewer::SetupLighting()
   ambient[2] = 0.0f;
   ambient[3] = 1.0f;
   glLightfv(GL_LIGHT0, GL_AMBIENT, ambient);
-  diffuse[0] = 1.0f;
-  diffuse[1] = 1.0f;
-  diffuse[2] = 1.0f;
+  diffuse[0] = 0.8f;
+  diffuse[1] = 0.8f;
+  diffuse[2] = 0.8f;
   diffuse[3] = 1.0f;
   glLightfv(GL_LIGHT0, GL_DIFFUSE, diffuse);
   specular[0] = 1.0f;
@@ -739,17 +737,8 @@ void GLViewer::LoadFile(const char * aFileName, const char * aOverrideTexture)
   cout << "done (" << int(mTimer.PopDelta() * 1000.0 + 0.5) << " ms)" << endl;
 
   // Get the file name (excluding the path), and the path (excluding the file name)
-  mFileName = string(aFileName);
-  size_t lastSlash = mFileName.rfind("/");
-  if(lastSlash == string::npos)
-    lastSlash = mFileName.rfind("\\");
-  if(lastSlash != string::npos)
-  {
-    mFilePath = mFileName.substr(0, lastSlash + 1);
-    mFileName = mFileName.substr(lastSlash + 1);
-  }
-  else
-    mFilePath = string("");
+  mFileName = ExtractFileName(string(aFileName));
+  mFilePath = ExtractFilePath(string(aFileName));
 
   // The temporary file size is now the official file size...
   mFileSize = tmpFileSize;
@@ -940,14 +929,14 @@ void GLViewer::Draw2DOverlay()
   glDisable(GL_DEPTH_TEST);
 
   // Render an info string
-  stringstream s;
-  s << mFileName << " (" << (mFileSize + 512) / 1024 << "KB)" << endl;
   if(mMesh)
   {
+    stringstream s;
+    s << mFileName << " (" << (mFileSize + 512) / 1024 << "KB)" << endl;
     s << mMesh->mVertices.size() << " vertices" << endl;
     s << mMesh->mIndices.size() / 3 << " triangles";
+    DrawString(s.str(), 10, mHeight - 50);
   }
-  DrawString(s.str(), 10, mHeight - 50);
 
   // Calculate buttons bounding box, and draw it as an outline box
   int x1 = 9999, y1 = 9999, x2 = 0, y2 = 0;
@@ -1014,13 +1003,15 @@ void GLViewer::UpdateFocus()
 void GLViewer::ActionOpenFile()
 {
   SysOpenDialog od;
-  od.mFilters.push_back(string("All supported 3D files|*.ctm;*.ply;*.stl;*.3ds;*.dae;*.obj"));
+  od.mFilters.push_back(string("All supported 3D files|*.ctm;*.ply;*.stl;*.3ds;*.dae;*.obj;*.lwo;*.off"));
   od.mFilters.push_back(string("OpenCTM (.ctm)|*.ctm"));
   od.mFilters.push_back(string("Stanford triangle format (.ply)|*.ply"));
   od.mFilters.push_back(string("Stereolitography (.stl)|*.stl"));
   od.mFilters.push_back(string("3D Studio (.3ds)|*.3ds"));
   od.mFilters.push_back(string("COLLADA (.dae)|*.dae"));
   od.mFilters.push_back(string("Wavefront geometry file (.obj)|*.obj"));
+  od.mFilters.push_back(string("LightWave object (.lwo)|*.lwo"));
+  od.mFilters.push_back(string("Geomview object file format (.off)|*.off"));
   if(od.Show())
   {
     try
@@ -1043,7 +1034,15 @@ void GLViewer::ActionOpenFile()
 void GLViewer::ActionSaveFile()
 {
   if(!mMesh)
+  {
+    SysMessageBox mb;
+    mb.mMessageType = SysMessageBox::mtError;
+    mb.mCaption = "Save File";
+    mb.mText = string("No mesh has been loaded.");
+    mb.Show();
     return;
+  }
+
   SysSaveDialog sd;
   sd.mFilters.push_back(string("All files|*"));
   sd.mFilters.push_back(string("OpenCTM (.ctm)|*.ctm"));
@@ -1052,12 +1051,21 @@ void GLViewer::ActionSaveFile()
   sd.mFilters.push_back(string("3D Studio (.3ds)|*.3ds"));
   sd.mFilters.push_back(string("COLLADA (.dae)|*.dae"));
   sd.mFilters.push_back(string("Wavefront geometry file (.obj)|*.obj"));
+  sd.mFilters.push_back(string("LightWave object (.lwo)|*.lwo"));
+  sd.mFilters.push_back(string("Geomview object file format (.off)|*.off"));
+  sd.mFilters.push_back(string("VRML 2.0 (.wrl)|*.wrl"));
   sd.mFileName = mFileName;
   if(sd.Show())
   {
     try
     {
       Options opt;
+
+      // Do not export normals that do not come from the original file
+      if(!mMesh->mOriginalNormals)
+        opt.mNoNormals = true;
+
+      // Export the mesh
       ExportMesh(sd.mFileName.c_str(), mMesh, opt);
     }
     catch(exception &e)
@@ -1074,15 +1082,27 @@ void GLViewer::ActionSaveFile()
 /// Open a texture file
 void GLViewer::ActionOpenTexture()
 {
+  if(!mMesh || (mMesh->mTexCoords.size() < 1))
+  {
+    SysMessageBox mb;
+    mb.mMessageType = SysMessageBox::mtError;
+    mb.mCaption = "Open Texture File";
+    mb.mText = string("This mesh does not have any texture coordinates.");
+    mb.Show();
+    return;
+  }
+
   SysOpenDialog od;
   od.mCaption = string("Open Texture File");
-  od.mFilters.push_back(string("All supported texture files|*.jpg;*.jpeg"));
+  od.mFilters.push_back(string("All supported texture files|*.jpg;*.jpeg;*.png"));
   od.mFilters.push_back(string("JPEG|*.jpg;*.jpeg"));
+  od.mFilters.push_back(string("PNG|*.png"));
   if(od.Show())
   {
     try
     {
       LoadTexture(od.mFileName.c_str());
+      mMesh->mTexFileName = ExtractFileName(od.mFileName);
       glutPostRedisplay();
     }
     catch(exception &e)
@@ -1179,10 +1199,8 @@ void GLViewer::ActionHelp()
 {
   stringstream helpText;
   helpText << "ctmviewer - OpenCTM file viewer" << endl;
-  helpText << "Copyright (c) 2009 Marcus Geelnard" << endl << endl;
+  helpText << "Copyright (c) 2009-2010 Marcus Geelnard" << endl << endl;
   helpText << "Keyboard actions:" << endl;
-  helpText << "  CTRL+O - Open file" << endl;
-  helpText << "  CTRL+S - Save file" << endl;
   helpText << "  W - Toggle wire frame view on/off" << endl;
   helpText << "  F - Fit model to the screen" << endl;
   helpText << "  Y - Set Y as the up axis (change camera view)" << endl;
@@ -1759,29 +1777,6 @@ void GLUTSpecialKeyDown(int key, int x, int y)
 /// Program entry.
 int main(int argc, char **argv)
 {
-  // Was the program invoked correctly?
-  if((argc < 2) || (argc > 3))
-  {
-    // ...usage
-    stringstream s;
-    s << "ctmviewer file [texturefile]" << endl;
-
-    // ...supported formats
-    s << endl << "Supported file formats:" << endl << endl;
-    list<string> formatList;
-    SupportedFormats(formatList);
-    for(list<string>::iterator i = formatList.begin(); i != formatList.end(); ++ i)
-      s << "  " << (*i) << endl;
-
-    // Show the message
-    SysMessageBox mb;
-    mb.mCaption = "Usage";
-    mb.mText = s.str();
-    mb.Show();
-
-    return 0;
-  }
-
   // Run the application class
   gGLViewer = new GLViewer;
   gGLViewer->Run(argc, argv);

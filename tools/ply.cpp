@@ -3,7 +3,7 @@
 // File:        ply.cpp
 // Description: Implementation of the PLY file format importer/exporter.
 //-----------------------------------------------------------------------------
-// Copyright (c) 2009 Marcus Geelnard
+// Copyright (c) 2009-2010 Marcus Geelnard
 //
 // This software is provided 'as-is', without any express or implied
 // warranty. In no event will the authors be held liable for any damages
@@ -35,6 +35,7 @@
 #include <clocale>
 #include <rply.h>
 #include "ply.h"
+#include "common.h"
 
 using namespace std;
 
@@ -229,10 +230,15 @@ void Import_PLY(const char * aFileName, Mesh * aMesh)
 }
 
 /// Export a PLY file to a file.
-void Export_PLY(const char * aFileName, Mesh * aMesh)
+void Export_PLY(const char * aFileName, Mesh * aMesh, Options &aOptions)
 {
   // Start by ensuring that we use proper locale settings for the file format
   setlocale(LC_NUMERIC, "C");
+
+  // What should we export?
+  bool exportTexCoords = aMesh->HasTexCoords() && !aOptions.mNoTexCoords;
+  bool exportNormals = aMesh->HasNormals() && !aOptions.mNoNormals;
+  bool exportColors = aMesh->HasColors() && !aOptions.mNoColors;
 
   // Open the output file
   ofstream f(aFileName, ios_base::out | ios_base::binary);
@@ -246,23 +252,34 @@ void Export_PLY(const char * aFileName, Mesh * aMesh)
   f << "ply" << endl;
   f << "format ascii 1.0" << endl;
   if(aMesh->mComment.size() > 0)
-    f << "comment " << aMesh->mComment << endl;
+  {
+    stringstream sstr(aMesh->mComment);
+    sstr.seekg(0);
+    while(!sstr.eof())
+    {
+      string line;
+      getline(sstr, line);
+      line = TrimString(line);
+      if(line.size() > 0)
+        f << "comment " << line << endl;
+    }
+  }
   f << "element vertex " << aMesh->mVertices.size() << endl;
   f << "property float x" << endl;
   f << "property float y" << endl;
   f << "property float z" << endl;
-  if(aMesh->mTexCoords.size() > 0)
+  if(exportTexCoords)
   {
     f << "property float s" << endl;
     f << "property float t" << endl;
   }
-  if(aMesh->mNormals.size() > 0)
+  if(exportNormals)
   {
     f << "property float nx" << endl;
     f << "property float ny" << endl;
     f << "property float nz" << endl;
   }
-  if(aMesh->mColors.size() > 0)
+  if(exportColors)
   {
     f << "property uchar red" << endl;
     f << "property uchar green" << endl;
@@ -276,19 +293,19 @@ void Export_PLY(const char * aFileName, Mesh * aMesh)
   for(unsigned int i = 0; i < aMesh->mVertices.size(); ++ i)
   {
     f << aMesh->mVertices[i].x << " " <<
-               aMesh->mVertices[i].y << " " <<
-               aMesh->mVertices[i].z;
-    if(aMesh->mTexCoords.size() > 0)
+         aMesh->mVertices[i].y << " " <<
+         aMesh->mVertices[i].z;
+    if(exportTexCoords)
       f << " " << aMesh->mTexCoords[i].u << " " <<
-                        aMesh->mTexCoords[i].v;
-    if(aMesh->mNormals.size() > 0)
+                  aMesh->mTexCoords[i].v;
+    if(exportNormals)
       f << " " << aMesh->mNormals[i].x << " " <<
-                        aMesh->mNormals[i].y << " " <<
-                        aMesh->mNormals[i].z;
-    if(aMesh->mColors.size() > 0)
+                  aMesh->mNormals[i].y << " " <<
+                  aMesh->mNormals[i].z;
+    if(exportColors)
       f << " " << int(floorf(255.0f * aMesh->mColors[i].x + 0.5f)) << " " <<
-                        int(floorf(255.0f * aMesh->mColors[i].y + 0.5f)) << " " <<
-                        int(floorf(255.0f * aMesh->mColors[i].z + 0.5f));
+                  int(floorf(255.0f * aMesh->mColors[i].y + 0.5f)) << " " <<
+                  int(floorf(255.0f * aMesh->mColors[i].z + 0.5f));
     f << endl;
   }
 

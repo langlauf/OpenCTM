@@ -3,7 +3,7 @@
 // File:        phong.frag
 // Description: GLSL per-pixel phong shader - fragment shader
 //-----------------------------------------------------------------------------
-// Copyright (c) 2009 Marcus Geelnard
+// Copyright (c) 2009-2010 Marcus Geelnard
 //
 // This software is provided 'as-is', without any express or implied
 // warranty. In no event will the authors be held liable for any damages
@@ -42,7 +42,8 @@ void main()
 		color *= texture2D(uTex, gl_TexCoord[0].st);
 
 	// Ambient term
-	vec4 ambient = color * gl_LightSource[0].ambient;
+//	vec4 ambient = color * gl_LightSource[0].ambient;
+	vec4 ambient = color * gl_LightModel.ambient;
 
 	// Diffuse term
 	vec3 lightDir = normalize(gl_LightSource[0].position.xyz - vPos);

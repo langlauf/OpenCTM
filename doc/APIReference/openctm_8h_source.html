@@ -27,7 +27,7 @@
 <a name="l00003"></a>00003 <span class="comment">// File:        openctm.h</span>
 <a name="l00004"></a>00004 <span class="comment">// Description: OpenCTM API definition.</span>
 <a name="l00005"></a>00005 <span class="comment">//-----------------------------------------------------------------------------</span>
-<a name="l00006"></a>00006 <span class="comment">// Copyright (c) 2009 Marcus Geelnard</span>
+<a name="l00006"></a>00006 <span class="comment">// Copyright (c) 2009-2010 Marcus Geelnard</span>
 <a name="l00007"></a>00007 <span class="comment">//</span>
 <a name="l00008"></a>00008 <span class="comment">// This software is provided &apos;as-is&apos;, without any express or implied</span>
 <a name="l00009"></a>00009 <span class="comment">// warranty. In no event will the authors be held liable for any damages</span>
@@ -94,11 +94,11 @@
 <a name="l00156"></a>00156 <span class="comment">// Get system specific type definitions for sized integers. We use the C99</span>
 <a name="l00157"></a>00157 <span class="comment">// standard stdint.h for this.</span>
 <a name="l00158"></a>00158 <span class="preprocessor">#ifdef _MSC_VER</span>
-<a name="l00159"></a>00159 <span class="preprocessor"></span><span class="comment">// MS Visual Studio does not support C99</span>
-<a name="l00160"></a>00160 <span class="keyword">typedef</span> <span class="keywordtype">int</span> int32_t;
-<a name="l00161"></a>00161 <span class="keyword">typedef</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> uint32_t;
+<a name="l00159"></a>00159 <span class="preprocessor"></span>  <span class="comment">// MS Visual Studio does not support C99</span>
+<a name="l00160"></a>00160   <span class="keyword">typedef</span> <span class="keywordtype">int</span> int32_t;
+<a name="l00161"></a>00161   <span class="keyword">typedef</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> uint32_t;
 <a name="l00162"></a>00162 <span class="preprocessor">#else</span>
-<a name="l00163"></a>00163 <span class="preprocessor"></span><span class="preprocessor">#include &lt;stdint.h&gt;</span>
+<a name="l00163"></a>00163 <span class="preprocessor"></span><span class="preprocessor">  #include &lt;stdint.h&gt;</span>
 <a name="l00164"></a>00164 <span class="preprocessor">#endif</span>
 <a name="l00165"></a>00165 <span class="preprocessor"></span>
 <a name="l00166"></a>00166 
@@ -272,15 +272,15 @@
 <a name="l00647"></a>00647 <span class="preprocessor">#endif</span>
 <a name="l00648"></a>00648 <span class="preprocessor"></span>
 <a name="l00649"></a>00649 
-<a name="l00650"></a>00650 <span class="comment">// C++ extensions to the API</span>
-<a name="l00651"></a>00651 <span class="preprocessor">#ifdef __cplusplus</span>
-<a name="l00652"></a>00652 <span class="preprocessor"></span><span class="preprocessor">#include &quot;<a class="code" href="openctmpp_8h.html">openctmpp.h</a>&quot;</span>
+<a name="l00650"></a>00650 <span class="comment">// C++ extensions to the API (to disable C++ extensions, define OPENCTM_NO_CPP)</span>
+<a name="l00651"></a>00651 <span class="preprocessor">#if defined(__cplusplus) &amp;&amp; !defined(OPENCTM_NO_CPP)</span>
+<a name="l00652"></a>00652 <span class="preprocessor"></span><span class="preprocessor">  #include &quot;<a class="code" href="openctmpp_8h.html">openctmpp.h</a>&quot;</span>
 <a name="l00653"></a>00653 <span class="preprocessor">#endif</span>
 <a name="l00654"></a>00654 <span class="preprocessor"></span>
 <a name="l00655"></a>00655 <span class="preprocessor">#endif // __OPENCTM_H_</span>
 </pre></div></div>
 <div style="padding: 1em 1em 0.5em 1em; margin: 2em 0 0 0; border-top: 1px solid #84b0c7; color: #808080; text-align: center;">
-  <p>Copyright &copy; 2009 Marcus Geelnard &mdash;
+  <p>Copyright &copy; 2009-2010 Marcus Geelnard &mdash;
   <a href="http://openctm.sourceforge.net" title="OpenCTM home page">openctm.sourceforge.net</a></p>
 </div>
 </body>

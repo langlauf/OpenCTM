@@ -3,7 +3,7 @@
 // File:        obj.h
 // Description: Interface for the OBJ file format importer/exporter.
 //-----------------------------------------------------------------------------
-// Copyright (c) 2009 Marcus Geelnard
+// Copyright (c) 2009-2010 Marcus Geelnard
 //
 // This software is provided 'as-is', without any express or implied
 // warranty. In no event will the authors be held liable for any damages
@@ -29,11 +29,12 @@
 #define __OBJ_H_
 
 #include "mesh.h"
+#include "convoptions.h"
 
 /// Import a mesh from an OBJ file.
 void Import_OBJ(const char * aFileName, Mesh * aMesh);
 
 /// Export a mesh to an OBJ file.
-void Export_OBJ(const char * aFileName, Mesh * aMesh);
+void Export_OBJ(const char * aFileName, Mesh * aMesh, Options &aOptions);
 
 #endif // __OBJ_H_

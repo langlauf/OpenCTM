@@ -3,7 +3,7 @@
 // File:        obj.cpp
 // Description: Implementation of the OBJ file format importer/exporter.
 //-----------------------------------------------------------------------------
-// Copyright (c) 2009 Marcus Geelnard
+// Copyright (c) 2009-2010 Marcus Geelnard
 //
 // This software is provided 'as-is', without any express or implied
 // warranty. In no event will the authors be held liable for any damages
@@ -33,6 +33,7 @@
 #include <vector>
 #include <list>
 #include "obj.h"
+#include "common.h"
 
 using namespace std;
 
@@ -67,14 +68,21 @@ class OBJFace {
     // Contruct a face (one triangle) from an OBJ face description string
     OBJFace(const string aStr)
     {
+      // Start by finding the first and last non-whitespace char (trim)
+      size_t l = aStr.size();
+      size_t pos = 0, strEnd = l - 1;
+      while((pos < strEnd) && ((aStr[pos] == ' ') || (aStr[pos] == '\t')))
+        ++ pos;
+      while((strEnd > pos) && ((aStr[strEnd] == ' ') || (aStr[strEnd] == '\t')))
+        -- strEnd;
+
       // Extract three face corners (one triangle)
-      unsigned int pos = 0;
-      while((pos < aStr.size()) && (aStr[pos] != ' '))
+      while((pos <= strEnd) && (aStr[pos] != ' ') && (aStr[pos] != '\t'))
       {
         // Extract three /-separated strings (v/vt/vn)
         string v_s[3];
         int j = 0;
-        while((pos < aStr.size()) && (aStr[pos] != ' '))
+        while((pos <= strEnd) && (aStr[pos] != ' ') && (aStr[pos] != '\t') && (j < 3))
         {
           if(aStr[pos] != '/')
             v_s[j] += aStr[pos];
@@ -82,7 +90,10 @@ class OBJFace {
             ++ j;
           ++ pos;
         }
-        ++ pos;
+
+        // Skip whitespaces
+        while((pos <= strEnd) && ((aStr[pos] == ' ') || (aStr[pos] == '\t')))
+          ++ pos;
 
         // Convert the strings to integers
         mNodes.push_back(OBJFaceNode());
@@ -98,6 +109,8 @@ class OBJFace {
               value --;
             else if(value < 0)
               throw runtime_error("Negative vertex references in OBJ files are not supported.");
+            else
+              throw runtime_error("Invalid index (zero) in OBJ file.");
           }
           n.Set(j, value);
         }
@@ -135,7 +148,7 @@ void Import_OBJ(const char * aFileName, Mesh * aMesh)
   aMesh->Clear();
 
   // Open the input file
-  ifstream inFile(aFileName, ios_base::in | ios_base::binary);
+  ifstream inFile(aFileName, ios_base::in);
   if(inFile.fail())
     throw runtime_error("Could not open input file.");
 
@@ -148,8 +161,17 @@ void Import_OBJ(const char * aFileName, Mesh * aMesh)
   // Parse the file
   while(!inFile.eof())
   {
+    // Read one line from the file (concatenate lines that end with "\")
     string line;
     getline(inFile, line);
+    while((line.size() > 0) && (line[line.size() - 1] == '\\') && !inFile.eof())
+    {
+      string nextLine;
+      getline(inFile, nextLine);
+      line = line.substr(0, line.size() - 1) + string(" ") + nextLine;
+    }
+
+    // Parse the line, if it is non-empty
     if(line.size() >= 1)
     {
       if(line.substr(0, 2) == string("v "))
@@ -180,9 +202,8 @@ void Import_OBJ(const char * aFileName, Mesh * aMesh)
   for(list<OBJFace>::iterator i = faces.begin(); i != faces.end(); ++ i)
   {
     int nodeCount = (*i).mNodes.size();
-    if(nodeCount < 3)
-      throw runtime_error("Faces must have at least three nodes.");
-    triCount += (nodeCount - 2);
+    if(nodeCount >= 3)
+      triCount += (nodeCount - 2);
   }
   aMesh->mIndices.resize(triCount * 3);
 
@@ -243,37 +264,48 @@ void Import_OBJ(const char * aFileName, Mesh * aMesh)
 }
 
 /// Export a mesh to an OBJ file.
-void Export_OBJ(const char * aFileName, Mesh * aMesh)
+void Export_OBJ(const char * aFileName, Mesh * aMesh, Options &aOptions)
 {
   // Open the output file
-  ofstream f(aFileName, ios_base::out | ios_base::binary);
+  ofstream f(aFileName, ios_base::out);
   if(f.fail())
     throw runtime_error("Could not open output file.");
 
-  bool hasUVCoords = (aMesh->mTexCoords.size() == aMesh->mVertices.size());
-  bool hasNormals = (aMesh->mNormals.size() == aMesh->mVertices.size());
+  // What should we export?
+  bool exportTexCoords = aMesh->HasTexCoords() && !aOptions.mNoTexCoords;
+  bool exportNormals = aMesh->HasNormals() && !aOptions.mNoNormals;
 
   // Set floating point precision
   f << setprecision(8);
 
   // Write comment
   if(aMesh->mComment.size() > 0)
-    f << "# " << aMesh->mComment << endl;
-  f << "# Generator: ctmconv" << endl;
+  {
+    stringstream sstr(aMesh->mComment);
+    sstr.seekg(0);
+    while(!sstr.eof())
+    {
+      string line;
+      getline(sstr, line);
+      line = TrimString(line);
+      if(line.size() > 0)
+        f << "# " << line << endl;
+    }
+  }
 
   // Write vertices
   for(unsigned int i = 0; i < aMesh->mVertices.size(); ++ i)
     f << "v " << aMesh->mVertices[i].x << " " << aMesh->mVertices[i].y << " " << aMesh->mVertices[i].z << endl;
 
   // Write UV coordinates
-  if(hasUVCoords)
+  if(exportTexCoords)
   {
     for(unsigned int i = 0; i < aMesh->mTexCoords.size(); ++ i)
       f << "vt " << aMesh->mTexCoords[i].u << " " << aMesh->mTexCoords[i].v << endl;
   }
 
   // Write normals
-  if(hasNormals)
+  if(exportNormals)
   {
     for(unsigned int i = 0; i < aMesh->mNormals.size(); ++ i)
       f << "vn " << aMesh->mNormals[i].x << " " << aMesh->mNormals[i].y << " " << aMesh->mNormals[i].z << endl;
@@ -286,26 +318,26 @@ void Export_OBJ(const char * aFileName, Mesh * aMesh)
   {
     unsigned int idx = aMesh->mIndices[i * 3] + 1;
     f << "f " << idx << "/";
-    if(hasUVCoords)
+    if(exportTexCoords)
       f << idx;
     f << "/";
-    if(hasNormals)
+    if(exportNormals)
       f << idx;
 
     idx = aMesh->mIndices[i * 3 + 1] + 1;
     f << " " << idx << "/";
-    if(hasUVCoords)
+    if(exportTexCoords)
       f << idx;
     f << "/";
-    if(hasNormals)
+    if(exportNormals)
       f << idx;
 
     idx = aMesh->mIndices[i * 3 + 2] + 1;
     f << " " << idx << "/";
-    if(hasUVCoords)
+    if(exportTexCoords)
       f << idx;
     f << "/";
-    if(hasNormals)
+    if(exportNormals)
       f << idx;
     f << endl;
   }

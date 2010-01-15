@@ -4,7 +4,7 @@
 - 3D viewer for models of various file formats
 .SH SYNOPSIS
 .B ctmviewer
-.I modelfile [texturefile]
+.I [modelfile [texturefile]]
 .SH DESCRIPTION
 .B ctmviewer
 is a 3D file viewer that can load, show and save 3D model files in several
@@ -45,7 +45,7 @@ By holding down the middle mouse button and moving the mouse, the camera will
 zoom in and out. It is also possible to use the mouse wheel (not supported on
 all systems) or the +/- keys to zoom in and out.
 .PP
-Double click the left mosue button on a point on the model to focus the camera
+Double click the left mouse button on a point on the model to focus the camera
 on that point.
 .PP
 Press the 'f' key to fit the model into the screen view (re-center and re-zoom).
@@ -62,10 +62,13 @@ Stanford triangle format (.ply),
 Stereolitography (.stl),
 3D Studio (.3ds),
 COLLADA 1.4/1.5 (.dae),
-Wavefront geometry file (.obj).
+Wavefront geometry file (.obj),
+LightWave object (.lwo),
+Geomview object file format (.off),
+VRML 2.0 - export only (.wrl).
 .PP
 The following 2D image file formats are supported (texture):
-JPEG (.jpg).
+JPEG (.jpg), PNG (.png).
 .SH AVAILABILITY
 .B ctmviewer
 is designed to be portable, and is available for several different systems,

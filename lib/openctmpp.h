@@ -3,7 +3,7 @@
 // File:        openctmpp.h
 // Description: C++ wrapper for the OpenCTM API.
 //-----------------------------------------------------------------------------
-// Copyright (c) 2009 Marcus Geelnard
+// Copyright (c) 2009-2010 Marcus Geelnard
 //
 // This software is provided 'as-is', without any express or implied
 // warranty. In no event will the authors be held liable for any damages
@@ -24,6 +24,9 @@
 //     3. This notice may not be removed or altered from any source
 //     distribution.
 //-----------------------------------------------------------------------------
+
+// To disable C++ extensions, define OPENCTM_NO_CPP
+#ifndef OPENCTM_NO_CPP
 
 #ifndef __OPENCTMPP_H_
 #define __OPENCTMPP_H_
@@ -370,3 +373,5 @@ class CTMexporter {
 };
 
 #endif // __OPENCTMPP_H_
+
+#endif // OPENCTM_NO_CPP

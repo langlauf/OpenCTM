@@ -3,7 +3,7 @@
 // File:        meshio.cpp
 // Description: Mesh I/O using different file format loaders/savers.
 //-----------------------------------------------------------------------------
-// Copyright (c) 2009 Marcus Geelnard
+// Copyright (c) 2009-2010 Marcus Geelnard
 //
 // This software is provided 'as-is', without any express or implied
 // warranty. In no event will the authors be held liable for any damages
@@ -37,28 +37,13 @@
 #include "3ds.h"
 #include "dae.h"
 #include "obj.h"
+#include "lwo.h"
+#include "off.h"
+#include "wrl.h"
+#include "common.h"
 
 using namespace std;
 
-
-// Convert a string to upper case.
-static string UpperCase(const string &aString)
-{
-  string result(aString);
-  for(unsigned int i = 0; i < result.size(); ++ i)
-    result[i] = toupper(result[i]);
-  return result;
-}
-
-// Extract the file extension of a file name.
-static string ExtractFileExt(const string &aString)
-{
-  string result = "";
-  size_t extPos = aString.rfind(".");
-  if(extPos != string::npos)
-    result = aString.substr(extPos);
-  return result;
-}
 
 /// Import a mesh from a file.
 void ImportMesh(const char * aFileName, Mesh * aMesh)
@@ -76,6 +61,12 @@ void ImportMesh(const char * aFileName, Mesh * aMesh)
     Import_DAE(aFileName, aMesh);
   else if(fileExt == string(".OBJ"))
     Import_OBJ(aFileName, aMesh);
+  else if(fileExt == string(".LWO"))
+    Import_LWO(aFileName, aMesh);
+  else if(fileExt == string(".OFF"))
+    Import_OFF(aFileName, aMesh);
+  else if(fileExt == string(".WRL"))
+    Import_WRL(aFileName, aMesh);
   else
     throw runtime_error("Unknown input file extension.");
 }
@@ -87,15 +78,21 @@ void ExportMesh(const char * aFileName, Mesh * aMesh, Options &aOptions)
   if(fileExt == string(".CTM"))
     Export_CTM(aFileName, aMesh, aOptions);
   else if(fileExt == string(".PLY"))
-    Export_PLY(aFileName, aMesh);
+    Export_PLY(aFileName, aMesh, aOptions);
   else if(fileExt == string(".STL"))
-    Export_STL(aFileName, aMesh);
+    Export_STL(aFileName, aMesh, aOptions);
   else if(fileExt == string(".3DS"))
-    Export_3DS(aFileName, aMesh);
+    Export_3DS(aFileName, aMesh, aOptions);
   else if(fileExt == string(".DAE"))
-    Export_DAE(aFileName, aMesh);
+    Export_DAE(aFileName, aMesh, aOptions);
   else if(fileExt == string(".OBJ"))
-    Export_OBJ(aFileName, aMesh);
+    Export_OBJ(aFileName, aMesh, aOptions);
+  else if(fileExt == string(".LWO"))
+    Export_LWO(aFileName, aMesh, aOptions);
+  else if(fileExt == string(".OFF"))
+    Export_OFF(aFileName, aMesh, aOptions);
+  else if(fileExt == string(".WRL"))
+    Export_WRL(aFileName, aMesh, aOptions);
   else
     throw runtime_error("Unknown output file extension.");
 }
@@ -109,4 +106,7 @@ void SupportedFormats(list<string> &aList)
   aList.push_back(string("3D Studio (.3ds)"));
   aList.push_back(string("COLLADA 1.4/1.5 (.dae)"));
   aList.push_back(string("Wavefront geometry file (.obj)"));
+  aList.push_back(string("LightWave object (.lwo)"));
+  aList.push_back(string("Geomview object file format (.off)"));
+  aList.push_back(string("VRML 2.0 (.wrl) - export only"));
 }
